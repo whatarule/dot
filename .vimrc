@@ -44,13 +44,11 @@ endif
 Plug 'joshdick/onedark.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'aereal/vim-colors-japanesque'
-Plug 'cocopon/iceberg.vim'
 Plug 'vim-scripts/oceandeep'
 Plug 'elmindreda/vimcolors'
 Plug 'demorose/up.vim'
 Plug 'andrwb/vim-lapis256'
 Plug 'vyshane/vydark-vim-color'
-Plug 'carlson-erik/wolfpack'
 Plug 'gregsexton/Muon'
 Plug 'lxmzhv/vim'
 Plug 'romainl/Apprentice'
@@ -61,6 +59,8 @@ Plug 'vim-scripts/vilight.vim'
 Plug 'nanotech/jellybeans.vim'
 Plug 'thomd/vim-wasabi-colorscheme'
 
+Plug 'carlson-erik/wolfpack'
+Plug 'cocopon/iceberg.vim'
 call plug#end()
 
 set t_Co=256
