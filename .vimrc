@@ -1,5 +1,4 @@
 
-
 " -- // keymap
 " cancellation
 noremap <C-j> <esc>
@@ -325,7 +324,7 @@ let g:elm_setup_keybindings = 1
 
 " -- // memolist
 let g:memolist_path = expand('~/Dropbox/memorandom')
-let g:memolist_template_dir_path = '~/Dropbox/memorandom'
+let g:memolist_template_dir_path = '~/Dropbox/memorandom/template'
 let g:memolist_memo_suffix = 'mrd'
 
 if has('nvim')
