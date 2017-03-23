@@ -1,4 +1,5 @@
 
+
 " -- // keymap
 " cancellation
 noremap <C-j> <esc>
@@ -9,7 +10,7 @@ nnoremap <silent><esc> :nohlsearch<cr>
 nnoremap <C-j> :nohlsearch<cr>
 nnoremap jj :nohlsearch<cr>
 
-" cursorr move
+" cursor move
 noremap j gj
 noremap k gk
 noremap <S-h> ^
@@ -55,13 +56,16 @@ noremap <A-tab> gt
 
 " terminal mode for neovim
 if has('nvim')
-noremap <space><space> :<C-u>vsplit<cr> :<C-u>terminal<cr>
+noremap <space><space> :<C-u>vsplit<cr>:<C-u>terminal<cr>
 "tnoremap <silent> <esc> <C-\><C-n>
 tnoremap jj <C-\><C-n>
 tnoremap <silent><esc> <C-\><C-n>
 tnoremap <C-j> <C-\><C-n>
 tnoremap <C-t> <up>
 tnoremap <C-g> <down>
+tnoremap <C-s> :<C-u>vsplit<cr>
+tnoremap <A-l> <C-w>l
+tnoremap <A-h> <C-w>h
 tnoremap ZZ <C-\><C-n>:q<cr>
 endif
 
@@ -125,7 +129,7 @@ Plug 'glidenote/memolist.vim'
 
 if has('nvim')
   let g:deoplete#enable_at_startup = 1
-elseif has('nvim')
+elseif !has('nvim')
   let g:neocomplete#enable_at_startup = 1
 endif
 "Plug 'ujihisa/neco-look'
@@ -185,6 +189,7 @@ let g:vimshell_prompt_expr = 'getcwd()." $ "'
 let g:vimshell_prompt_pattern = '^\f\+ $ '
 let g:vimshell_split_command = 'vsplit'
 let g:vimshell_popup_command = 'vsplit'
+" autocmd ColorScheme * highlight VimshellPrompt ctermfg=none guifg=none
 
 " -- // terminal mode
 set sh=fish
@@ -204,7 +209,6 @@ let g:terminal_color_12 = '#729fcf'
 let g:terminal_color_13 = '#ad7fa8'
 let g:terminal_color_14 = '#00f5e9'
 let g:terminal_color_15 = '#eeeeec'
-" autocmd ColorScheme * highlight VimshellPrompt ctermfg=none guifg=none
 
 " -- // lightline
 if has('nvim')
@@ -244,7 +248,6 @@ else
   \}
 endif
 
-
 " statusline
 " based on "http://qiita.com/tashua314/items/101f1bec368c75a90251"
 " ステータスラインを常に表示(0:表示しない、1:2つ以上ウィンドウがある時だけ表示)
@@ -276,10 +279,6 @@ set statusline+=\ |
 " set statusline+=%*
 
 
-
-" -- // neoterm
-let g:neoterm_position = 'vertical'
-
 " -- // ale
 " let g:ale_emit_conflict_warnings = 0
 " let g:ale_linters = {
@@ -298,11 +297,6 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 " let g:ale_open_list = 1
 " let g:ale_keep_list_window_open = 1
 
-" -- // syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
 
 " -- // elm-vim
 " syntastic
@@ -329,6 +323,27 @@ let g:elm_format_autosave = 0
 let g:elm_format_fail_silently = 0
 let g:elm_setup_keybindings = 1
 
+" -- // memolist
+let g:memolist_path = expand('~/Dropbox/memorandom')
+let g:memolist_template_dir_path = '~/Dropbox/memorandom'
+let g:memolist_memo_suffix = 'mrd'
+
+if has('nvim')
+  let g:memolist_denite = 1
+  let g:memolist_denite_option = '-default-action=vsplit'
+elseif !has('nvim')
+  let g:memolist_unite = 1
+  let g:memolist_unite_option = '-vertical -start-insert'
+endif
+let g:memolist_gfixgrep = 1
+
+nnoremap <space>mn :<C-u>vsplit<cr>:<C-u>MemoNew<CR>
+nnoremap <space>ml :<C-u>MemoList<CR>
+nnoremap <space>mg :<C-u>vsplit<cr>:<C-u>MemoGrep<CR>
+
+" -- // vim-trailing-whitespace
+autocmd BufWritePre * :FixWhitespace
+
 
 " -- // denite.nvim
 if has('nvim')
@@ -352,6 +367,7 @@ if has('nvim')
   call denite#custom#var('grep', 'final_opts', [])
 
   call denite#custom#map('insert', '<C-j>', '<denite:leave_mode>', 'noremap')
+  call denite#custom#map('insert', 'ZZ', '<denite:leave_mode>', 'noremap')
 " call denite#custom#map(
 "       \ 'insert',
 "       \ '<C-j>',
@@ -376,15 +392,6 @@ if !has('nvim')
   catch
   endtry
 endif
-
-" -- // ag.vim
-" --- type ° to search the word in all files in the current dir
-"nmap ° :Ag <c-r>=expand("<cword>")<cr><cr>
-nnoremap <space>/ :Ag
-
-" -- // vim-trailing-whitespace
-autocmd BufWritePre * :FixWhitespace
-
 
 " -- // neocomplete.vim
 "Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
@@ -460,6 +467,22 @@ endif
 
 " -- // neco-look
 let g:neocomplete#text_mode_filetypes = { "_" : 1 }
+
+
+
+" -- // ag.vim
+" --- type ° to search the word in all files in the current dir
+"nmap ° :Ag <c-r>=expand("<cword>")<cr><cr>
+"nnoremap <space>/ :Ag
+
+" -- // neoterm
+"let g:neoterm_position = 'vertical'
+
+" -- // syntastic
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 
 
 
