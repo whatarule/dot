@@ -1,44 +1,140 @@
 
+" -- // keymap
+" cancellation
+noremap <C-j> <esc>
+noremap! <C-j> <esc>
+noremap jj <esc>
+noremap! jj <esc>
+nnoremap <silent><esc> :nohlsearch<cr>
+nnoremap <C-j> :nohlsearch<cr>
+nnoremap jj :nohlsearch<cr>
+
+" cursorr move
+noremap j gj
+noremap k gk
+noremap <S-h> ^
+noremap <S-l> $
+"noremap <C-a> ^
+"noremap <C-e> $
+noremap <S-j> }
+noremap <S-k> {
+noremap <C-a> <home>
+noremap! <C-a> <home>
+noremap <C-e> <end>
+noremap! <C-e> <end>
+
+" edit utility
+"nnoremap <cr> o<esc>
+"inoremap [ []<left>
+"inoremap ( ()<left>
+"inoremap { {}<left>
+"yankround
+nmap <silent>p <Plug>(yankround-p)
+nmap <silent>P <Plug>(yankround-P)
+nmap gp <Plug>(yankround-gp)
+nmap gP <Plug>(yankround-gP)
+nmap <C-p> <Plug>(yankround-prev)
+nmap <C-n> <Plug>(yankround-next)
+
+" window control
+set splitright
+set splitbelow
+noremap <C-s> :<C-u>vsplit<cr>
+noremap! <C-s> <esc> :<C-u>vsplit<cr>
+noremap <A-l> <C-w>l
+noremap <A-h> <C-w>h
+"noremap <C-\> <C-w>|
+"noremap <C-^> <C-w>=
+
+" tab control
+noremap <C-t> :<C-u>tabnew<cr>:<C-u>FZF<cr>
+"noremap <C-t> :<C-u>tabnew<cr>:<C-u>Denite -resume -immediately <cr>
+"noremap <C-t> :<C-u>Denite buffer -immediately -default-action=tabopen <cr>
+noremap <A-tab> gt
+"noremap <S-A-tab> gT
+
+" terminal mode for neovim
+if has('nvim')
+noremap <space><space> :<C-u>vsplit<cr> :<C-u>terminal<cr>
+"tnoremap <silent> <esc> <C-\><C-n>
+tnoremap jj <C-\><C-n>
+tnoremap <silent><esc> <C-\><C-n>
+tnoremap <C-j> <C-\><C-n>
+tnoremap <C-t> <up>
+tnoremap <C-g> <down>
+tnoremap ZZ <C-\><C-n>:q<cr>
+endif
+
+" command support
+"noremap <C-:> q:
+"noremap! <C-:> q:
+" fzf
+noremap <C-f> :<C-u>FZF<cr>
+" denite
+if has('nvim')
+nnoremap <C-d>b :<C-u>Denite buffer <cr>
+nnoremap <C-d>f :<C-u>Denite file_old <cr>
+nnoremap <C-d>m :<C-u>Denite file_mru <cr>
+nnoremap <C-d>y :<C-u>Denite neoyank <cr>
+nnoremap <C-d>l :<C-u>Denite line <cr>
+nnoremap <C-d>g :<C-u>Denite grep <cr>
+nnoremap <C-d>h :<C-u>Denite help <cr>
+
+" unite
+elseif !has('nvim')
+nnoremap <C-d>f :<C-u>Unite file_rec <cr>
+endif
+
+
 " -- // plugin
 
 " -- // vim-plug
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'rking/ag.vim'
+if has('nvim')
+  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'w0rp/ale'
+elseif !has('nvim')
+  Plug 'Shougo/unite.vim'
+  Plug 'ujihisa/unite-colorscheme'
+  Plug 'Shougo/neocomplete.vim'
+endif
+Plug 'cocopon/vaffle.vim'
 
-Plug 'ujihisa/unite-colorscheme'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'LeafCage/yankround.vim'
+Plug 'Shougo/neoyank.vim'
+Plug 'vim-scripts/mru.vim'
+Plug 'Shougo/neomru.vim'
 Plug 'bronson/vim-trailing-whitespace'
 
-Plug 'Shougo/neocomplete.vim'
-Plug 'ujihisa/neco-look'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
+Plug 'tpope/vim-endwise'
 
 Plug 'Shougo/vimshell.vim'
-Plug 'kassio/neoterm'
-
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 Plug 'itchyny/lightline.vim'
-
-Plug 'elmcast/elm-vim'
-
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'w0rp/ale'
-endif
+Plug 'glidenote/memolist.vim'
 
 if has('nvim')
   let g:deoplete#enable_at_startup = 1
 elseif has('nvim')
   let g:neocomplete#enable_at_startup = 1
 endif
+"Plug 'ujihisa/neco-look'
+Plug 'elmcast/elm-vim'
 
-" Plug 'vim-syntastic/syntastic'
+
+"Plug 'rking/ag.vim'
+"Plug 'kassio/neoterm'
+"Plug 'vim-syntastic/syntastic'
 
 " -- // colorscheme
 Plug 'joshdick/onedark.vim'
@@ -212,10 +308,17 @@ let g:syntastic_check_on_wq = 0
 " syntastic
 let g:elm_syntastic_show_warnings = 1
 " neocomplete
-call neocomplete#util#set_default_dictionary(
-  \ 'g:neocomplete#sources#omni#input_patterns',
-  \ 'elm',
-  \ '\.')
+if has('nvim')
+" call deoplete#util#set_default_dictionary(
+"   \ 'g:deoplete#sources#omni#input_patterns',
+"   \ 'elm',
+"   \ '\.')
+elseif !has('nvim')
+  call neocomplete#util#set_default_dictionary(
+    \ 'g:neocomplete#sources#omni#input_patterns',
+    \ 'elm',
+    \ '\.')
+endif
 " usage
 let g:elm_jump_to_error = 0
 let g:elm_make_output_file = "elm.js"
@@ -227,20 +330,52 @@ let g:elm_format_fail_silently = 0
 let g:elm_setup_keybindings = 1
 
 
+" -- // denite.nvim
+if has('nvim')
+
+" call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+  call denite#custom#var('file_rec', 'command', ['rg', '--files', '--glob', '!.git', ''])
+  call denite#custom#source('file_rec', 'matchers', ['mather_fuzzy'])
+
+" call denite#custom#var('grep', 'command', ['ag'])
+" call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
+" call denite#custom#var('grep', 'recursive_opts', [])
+" call denite#custom#var('grep', 'pattern_opt', [])
+" call denite#custom#var('grep', 'separator', ['--'])
+" call denite#custom#var('grep', 'final_opts', [])
+
+  call denite#custom#var('grep', 'command', ['rg'])
+  call denite#custom#var('grep', 'default_opts', ['--vimgrep', '--no-heading'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'final_opts', [])
+
+  call denite#custom#map('insert', '<C-j>', '<denite:leave_mode>', 'noremap')
+" call denite#custom#map(
+"       \ 'insert',
+"       \ '<C-j>',
+"       \ '<denite:move_to_next_line>',
+"       \ 'noremap'
+"       \)
+" call denite#custom#map(
+"       \ 'insert',
+"       \ '<C-k>',
+"       \ '<denite:move_to_previous_line>',
+"       \ 'noremap'
+"       \)
+endif
 
 " -- // unite.vim
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
-let g:unite_source_history_yank_enable = 1
-try
-  let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
-  call unite#filters#matcher_default#use(['matcher_fuzzy'])
-catch
-endtry
-" search a file in the filetree
-"nnoremap <space><space> :split<cr> :<C-u>Unite -start-insert file_rec/async<cr>
-nnoremap <space><space> :vsplit<cr> <C-w>l :<C-u>Unite -start-insert file_rec/async<cr>
-" reset not it is <C-l> normally
-:nnoremap <space>r <Plug>(unite_restart)
+if !has('nvim')
+  let g:unite_source_history_yank_enable = 1
+  try
+    let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
+    call unite#filters#matcher_default#use(['matcher_fuzzy'])
+  catch
+  endtry
+endif
 
 " -- // ag.vim
 " --- type ° to search the word in all files in the current dir
@@ -253,73 +388,75 @@ autocmd BufWritePre * :FixWhitespace
 
 " -- // neocomplete.vim
 "Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+if !has('nvim')
+  " Disable AutoComplPop.
+  let g:acp_enableAtStartup = 0
+  " Use smartcase.
+  let g:neocomplete#enable_smart_case = 1
+  " Set minimum syntax keyword length.
+  let g:neocomplete#sources#syntax#min_keyword_length = 3
 
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
+  " Define dictionary.
+  let g:neocomplete#sources#dictionary#dictionaries = {
+      \ 'default' : '',
+      \ 'vimshell' : $HOME.'/.vimshell_hist',
+      \ 'scheme' : $HOME.'/.gosh_completions'
+          \ }
 
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
+  " Define keyword.
+  if !exists('g:neocomplete#keyword_patterns')
+      let g:neocomplete#keyword_patterns = {}
+  endif
+  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+  " Plugin key-mappings.
+  inoremap <expr><C-g>     neocomplete#undo_completion()
+  inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+  " Recommended key-mappings.
+  " <CR>: close popup and save indent.
+  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+  function! s:my_cr_function()
+    return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+    " For no inserting <CR> key.
+    "return pumvisible() ? "\<C-y>" : "\<CR>"
+  endfunction
+  " <TAB>: completion.
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  " <C-h>, <BS>: close popup and delete backword char.
+  inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+  inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+  " Close popup by <Space>.
+  "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+  " AutoComplPop like behavior.
+  "let g:neocomplete#enable_auto_select = 1
+
+  " Shell like behavior(not recommended).
+  "set completeopt+=longest
+  "let g:neocomplete#enable_auto_select = 1
+  "let g:neocomplete#disable_auto_complete = 1
+  "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+  " Enable omni completion.
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+  " Enable heavy omni completion.
+  if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+  endif
+  "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+  "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+  "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+  " For perlomni.vim setting.
+  " https://github.com/c9s/perlomni.vim
+  let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " -- // neco-look
 let g:neocomplete#text_mode_filetypes = { "_" : 1 }
@@ -327,29 +464,6 @@ let g:neocomplete#text_mode_filetypes = { "_" : 1 }
 
 
 " -- // basic configuration
-inoremap <C-j> <Esc>
-vnoremap <C-j> <Esc>
-inoremap jj <Esc>
-nnoremap <Esc><Esc> :nohlsearch<CR><Esc>
-"nnoremap <C-j><C-j> :nohlsearch<CR><Esc>
-noremap <S-h> ^
-noremap <S-l> $
-"noremap <C-a> ^
-"noremap <C-e> $
-noremap <S-j> }
-noremap <S-k> {
-"nnoremap <CR> o<Esc>
-nnoremap <C-j> o<Esc>
-noremap j gj
-noremap k gk
-"inoremap [ []<left>
-"inoremap ( ()<left>
-"inoremap { {}<left>
-
-if has('nvim')
-tnoremap <silent> <ESC> <C-\><C-n>
-tnoremap <silent> <C-j> <C-\><C-n>
-endif
 
 " based on "http://itchyny.hatenablog.com/entry/2014/12/25/090000"
 nnoremap Y y$
