@@ -3,11 +3,11 @@
 " cancellation
 noremap <C-j> <esc>
 noremap! <C-j> <esc>
-noremap jj <esc>
+"noremap jj <esc>
 noremap! jj <esc>
 nnoremap <silent><esc> :nohlsearch<cr>
 nnoremap <C-j> :nohlsearch<cr>
-nnoremap jj :nohlsearch<cr>
+"nnoremap jj :nohlsearch<cr>
 
 " cursor move
 noremap j gj
@@ -55,7 +55,7 @@ noremap <A-tab> gt
 
 " terminal mode for neovim
 if has('nvim')
-noremap <space><space> :<C-u>vsplit<cr>:<C-u>terminal<cr>
+noremap <space><space> :<C-u>vsplit<cr>:<C-u>terminal<cr>ls -a<cr>
 "tnoremap <silent> <esc> <C-\><C-n>
 tnoremap jj <C-\><C-n>
 tnoremap <silent><esc> <C-\><C-n>
@@ -94,6 +94,7 @@ endif
 " -- // vim-plug
 
 call plug#begin('~/.vim/plugged')
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
 if has('nvim')
   Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -104,7 +105,6 @@ elseif !has('nvim')
   Plug 'ujihisa/unite-colorscheme'
   Plug 'Shougo/neocomplete.vim'
 endif
-Plug 'cocopon/vaffle.vim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -119,7 +119,6 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'tpope/vim-endwise'
 
 Plug 'Shougo/vimshell.vim'
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
@@ -132,6 +131,7 @@ elseif !has('nvim')
   let g:neocomplete#enable_at_startup = 1
 endif
 "Plug 'ujihisa/neco-look'
+Plug 'pbogut/deoplete-elm'
 Plug 'elmcast/elm-vim'
 
 
