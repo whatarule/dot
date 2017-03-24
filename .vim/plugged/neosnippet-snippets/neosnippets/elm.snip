@@ -2,6 +2,14 @@
 # wk
 # -- //
 
+snippet import
+  import ${1:String} exposing (..)
+
+snippet importHtml
+  import Html exposing (..)
+  import Html.Attributes exposing (..)
+  import Html.Events exposing (..)
+
 snippet main
   main : Program Never Model Msg
   main = program {
@@ -14,7 +22,7 @@ snippet main
 snippet typeModel
   type alias Model = {
           ${1:String} : ${2:String}
-      ,   ${3:String} : ${4:String}
+      ,   ${1:String} : ${2:String}
       }
 
 snippet init
@@ -23,75 +31,86 @@ snippet init
 snippet typeMsg
   type Msg =
           ${1:String}
-      |   ${2:String}
+      |   ${1:String}
 
 snippet update
   update : Msg -> Model -> ( Model, Cmd Msg )
   update msg model = case msg of
       ${1:String} ->
           ( { model |  }, Cmd.none )
-      ${2:String} ->
+      ${1:String} ->
           ( { model |  }, Cmd.none )
+
+snippet subscriptions
+  subscriptions : Model -> Sub Msg
+  subscriptions model = Sub.none
+
+snippet view
+  view : Model -> Html Msg
+  view model =
+      ${1:String} [] [
+          ${1:String} [] []
+      ,   ${1:String} [] []
+      ]
 
 # -- //
 
 
-
-snippet module
-options head
-	module `substitute(substitute(expand('%:r'), '[/\\]','.','g'),'^\%(\l*\.\)\?','','')` ${1} where${2}
-
-
-snippet import
-options head
-abbr    import
-alias   imp
-	import ${1:String}
-
-
-snippet importAs
-options head
-abbr    import ... as ...
-alias   impa
-	import ${1} as ${2}
-
-
-snippet importExposing
-options head
-abbr    import ... exposing (..)
-alias   impe
-	import ${1:Html} exposing (${2:..})
-
-
-#snippet main
+#snippet module
 #options head
-#	main : Signal Html
-#	main =
-#		${0}
-
-
-snippet case
-abbr    case ... of
-	case ${1} of
-		${2} -> ${0}
-
-
-snippet if
-abbr    if ... then ... else ...
-	if ${1} then
-		${2}
-	else
-		${3}
-
-
-snippet     let
-abbr        let ... in ...
-options     head
-	let ${1} =${2}
-	in
-		${3}
-
-
-snippet     lambda
-abbr        λ
-	\ ${1:x} -> ${0}
+#	module `substitute(substitute(expand('%:r'), '[/\\]','.','g'),'^\%(\l*\.\)\?','','')` ${1} where${2}
+#
+#
+#snippet import
+#options head
+#abbr    import
+#alias   imp
+#	import ${1:String}
+#
+#
+#snippet importAs
+#options head
+#abbr    import ... as ...
+#alias   impa
+#	import ${1} as ${2}
+#
+#
+#snippet importExposing
+#options head
+#abbr    import ... exposing (..)
+#alias   impe
+#	import ${1:Html} exposing (${2:..})
+#
+#
+##snippet main
+##options head
+##	main : Signal Html
+##	main =
+##		${0}
+#
+#
+#snippet case
+#abbr    case ... of
+#	case ${1} of
+#		${2} -> ${0}
+#
+#
+#snippet if
+#abbr    if ... then ... else ...
+#	if ${1} then
+#		${2}
+#	else
+#		${3}
+#
+#
+#snippet     let
+#abbr        let ... in ...
+#options     head
+#	let ${1} =${2}
+#	in
+#		${3}
+#
+#
+#snippet     lambda
+#abbr        λ
+#	\ ${1:x} -> ${0}
