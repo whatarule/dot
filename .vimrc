@@ -14,8 +14,6 @@ noremap j gj
 noremap k gk
 noremap <S-h> ^
 noremap <S-l> $
-"noremap <C-a> ^
-"noremap <C-e> $
 noremap <S-j> }
 noremap <S-k> {
 noremap <C-a> <home>
@@ -36,26 +34,43 @@ nmap gP <Plug>(yankround-gP)
 nmap <C-p> <Plug>(yankround-prev)
 nmap <C-n> <Plug>(yankround-next)
 
+" neosnippet
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
+inoremap <expr><tab> pumvisible() ? "\<C-n>" :
+  \ neosnippet#expandable_or_jumpable() ?
+  \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
+snoremap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
 " window control
 set splitright
 set splitbelow
 noremap <C-s> :<C-u>vsplit<cr>
 noremap! <C-s> <esc> :<C-u>vsplit<cr>
 noremap <A-l> <C-w>l
+noremap <A-j> <C-w>j
+noremap <A-k> <C-w>k
 noremap <A-h> <C-w>h
+noremap! <A-l> <C-w>l
+noremap! <A-j> <C-w>j
+noremap! <A-k> <C-w>k
+noremap! <A-h> <C-w>h
 "noremap <C-\> <C-w>|
 "noremap <C-^> <C-w>=
 
 " tab control
-noremap <C-t> :<C-u>tabnew<cr>:<C-u>FZF<cr>
+noremap <C-t> :<C-u>tabnew<cr>:<C-u>cd<cr>:<C-u>FZF<cr>
 "noremap <C-t> :<C-u>tabnew<cr>:<C-u>Denite -resume -immediately <cr>
 "noremap <C-t> :<C-u>Denite buffer -immediately -default-action=tabopen <cr>
 noremap <A-tab> gt
+noremap! <A-tab> gt
 "noremap <S-A-tab> gT
 
 " terminal mode for neovim
 if has('nvim')
-noremap <space><space> :<C-u>vsplit<cr>:<C-u>terminal<cr>ls -a<cr>
+noremap <space><space> :<C-u>vsplit<cr>:<C-u>terminal<cr>ls -la<cr>
 "tnoremap <silent> <esc> <C-\><C-n>
 tnoremap jj <C-\><C-n>
 tnoremap <silent><esc> <C-\><C-n>
@@ -64,15 +79,16 @@ tnoremap <C-t> <up>
 tnoremap <C-g> <down>
 tnoremap <C-s> :<C-u>vsplit<cr>
 tnoremap <A-l> <C-w>l
+tnoremap <A-j> <C-w>j
+tnoremap <A-k> <C-w>k
 tnoremap <A-h> <C-w>h
 tnoremap ZZ <C-\><C-n>:q<cr>
 endif
 
 " command support
-"noremap <C-:> q:
-"noremap! <C-:> q:
 " fzf
-noremap <C-f> :<C-u>FZF<cr>
+noremap <C-f>c :<C-u>FZF<cr>
+noremap <C-f>a :<C-u>cd<cr>:<C-u>FZF<cr>
 " denite
 if has('nvim')
 nnoremap <C-d>b :<C-u>Denite buffer <cr>
@@ -82,11 +98,13 @@ nnoremap <C-d>y :<C-u>Denite neoyank <cr>
 nnoremap <C-d>l :<C-u>Denite line <cr>
 nnoremap <C-d>g :<C-u>Denite grep <cr>
 nnoremap <C-d>h :<C-u>Denite help <cr>
-
 " unite
 elseif !has('nvim')
 nnoremap <C-d>f :<C-u>Unite file_rec <cr>
 endif
+" cancellation
+"noremap <C-:> q:
+"noremap! <C-:> q:
 
 
 " -- // plugin
@@ -343,6 +361,12 @@ nnoremap <space>mg :<C-u>vsplit<cr>:<C-u>MemoGrep<CR>
 " -- // vim-trailing-whitespace
 autocmd BufWritePre * :FixWhitespace
 
+" -- // neosnippet
+" For conceal markers.
+let g:neosnippet#snippets_directory='~/.vim/plugged/neosnippet-snippets/neosnippets'
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 
 " -- // denite.nvim
 if has('nvim')
