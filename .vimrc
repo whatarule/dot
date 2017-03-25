@@ -1,8 +1,18 @@
 
-"set shell=bash
+" -- // initialize
+"set all&
+autocmd!
+
+" -- // shell
+set shell=bash
 "set shell=/bin/bash
 "set shell=/bin/bash\ -l\ -O\ expand_aliases
+"set shell=fish
 "set shell=/usr/bin/fish
+
+" -- // vimrc
+noremap <C-d>e :<C-u>edit $MYVIMRC<cr>
+noremap <C-d>s :<C-u>write<cr>:<C-u>source $MYVIMRC<cr>
 
 " -- // keymap
 " cancellation
@@ -66,7 +76,8 @@ noremap! <A-h> <C-w>h
 "noremap <C-^> <C-w>=
 
 " tab control
-noremap <C-t> :<C-u>tabnew<cr>:<C-u>cd<cr>:<C-u>FZF<cr>
+noremap <C-t> :<C-u>tabnew<cr>
+"noremap <C-t> :<C-u>tabnew<cr>:<C-u>cd<cr>:<C-u>FZF<cr>
 "noremap <C-t> :<C-u>tabnew<cr>:<C-u>Denite -resume -immediately <cr>
 "noremap <C-t> :<C-u>Denite buffer -immediately -default-action=tabopen <cr>
 noremap <A-tab> gt
@@ -75,7 +86,8 @@ noremap! <A-tab> gt
 
 " terminal mode for neovim
 if has('nvim')
-noremap <space><space> :<C-u>vsplit<cr>:<C-u>terminal<cr>fish<cr>ls -la<cr>
+noremap <space><space> :<C-u>terminal<cr><C-u>fish<cr><C-u>ls -la<cr>
+"noremap <space><space> :<C-u>vsplit<cr>:<C-u>terminal<cr>fish<cr>ls -la<cr>
 "tnoremap <silent> <esc> <C-\><C-n>
 tnoremap jj <C-\><C-n>
 tnoremap <silent><esc> <C-\><C-n>
