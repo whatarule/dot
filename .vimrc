@@ -1,4 +1,9 @@
 
+"set shell=bash
+"set shell=/bin/bash
+"set shell=/bin/bash\ -l\ -O\ expand_aliases
+"set shell=/usr/bin/fish
+
 " -- // keymap
 " cancellation
 noremap <C-j> <esc>
@@ -38,9 +43,9 @@ nmap <C-n> <Plug>(yankround-next)
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
-inoremap <expr><tab> pumvisible() ? "\<C-n>" :
-  \ neosnippet#expandable_or_jumpable() ?
-  \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
+"inoremap <expr><tab> pumvisible() ? "\<C-n>" :
+"  \ neosnippet#expandable_or_jumpable() ?
+"  \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
 snoremap <expr><TAB> neosnippet#expandable_or_jumpable() ?
   \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
@@ -70,7 +75,7 @@ noremap! <A-tab> gt
 
 " terminal mode for neovim
 if has('nvim')
-noremap <space><space> :<C-u>vsplit<cr>:<C-u>terminal<cr>ls -la<cr>
+noremap <space><space> :<C-u>vsplit<cr>:<C-u>terminal<cr>fish<cr>ls -la<cr>
 "tnoremap <silent> <esc> <C-\><C-n>
 tnoremap jj <C-\><C-n>
 tnoremap <silent><esc> <C-\><C-n>
@@ -209,7 +214,6 @@ let g:vimshell_popup_command = 'vsplit'
 " autocmd ColorScheme * highlight VimshellPrompt ctermfg=none guifg=none
 
 " -- // terminal mode
-set sh=fish
 let g:terminal_color_0  = '#2e3436'
 let g:terminal_color_1  = '#cc0000'
 let g:terminal_color_2  = '#4e9a06'
@@ -297,11 +301,12 @@ set statusline+=\ |
 
 
 " -- // ale
-" let g:ale_emit_conflict_warnings = 0
-" let g:ale_linters = {
-" \    'elm': ['make']
+let g:ale_emit_conflict_warnings = 0
+"let g:ale_linters = {
+"  \    'elm': ['make']
+"  \}
 " \    'vim': ['vint']
-" \}
+" \,   'elm': ['make']
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
@@ -309,10 +314,10 @@ let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
-" let g:ale_set_loclist = 0
-" let g:ale_set_quickfix = 1
-" let g:ale_open_list = 1
-" let g:ale_keep_list_window_open = 1
+"let g:ale_set_loclist = 0
+"let g:ale_set_quickfix = 1
+"let g:ale_open_list = 1
+"let g:ale_keep_list_window_open = 1
 
 
 " -- // elm-vim
