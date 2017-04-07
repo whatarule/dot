@@ -10,6 +10,11 @@ set shell=bash
 "set shell=fish
 "set shell=/usr/bin/fish
 
+" - // yank
+"set clipboard=unnamed
+"set clipboard+=unnamed
+set clipboard+=unnamedplus
+
 " -- // vimrc
 noremap <C-d>e :<C-u>edit $MYVIMRC<cr>
 noremap <C-d>s :<C-u>write<cr>:<C-u>source $MYVIMRC<cr>
@@ -86,7 +91,8 @@ noremap! <A-tab> gt
 
 " terminal mode for neovim
 if has('nvim')
-noremap <space><space> :<C-u>terminal<cr><C-u>fish<cr><C-u>ls -la<cr>
+noremap <space><space> :<C-u>terminal<cr><C-u>fish<cr>
+"noremap <space><space> :<C-u>terminal<cr><C-u>fish<cr><C-u>ls -la<cr>
 "noremap <space><space> :<C-u>vsplit<cr>:<C-u>terminal<cr>fish<cr>ls -la<cr>
 "tnoremap <silent> <esc> <C-\><C-n>
 tnoremap jj <C-\><C-n>
@@ -99,16 +105,19 @@ tnoremap <A-l> <C-w>l
 tnoremap <A-j> <C-w>j
 tnoremap <A-k> <C-w>k
 tnoremap <A-h> <C-w>h
+tnoremap <C-t> <C-\><C-n>:<C-u>tabnew<cr>
+tnoremap <A-tab> <C-\><C-n>gt
 tnoremap ZZ <C-\><C-n>:q<cr>
 endif
 
 " command support
 " fzf
-noremap <C-f>c :<C-u>FZF<cr>
+noremap <C-f>d :<C-u>FZF<cr>
 noremap <C-f>a :<C-u>cd<cr>:<C-u>FZF<cr>
 " denite
 if has('nvim')
 nnoremap <C-d>b :<C-u>Denite buffer <cr>
+nnoremap <C-d>r :<C-u>Denite file_rec <cr>
 nnoremap <C-d>f :<C-u>Denite file_old <cr>
 nnoremap <C-d>m :<C-u>Denite file_mru <cr>
 nnoremap <C-d>y :<C-u>Denite neoyank <cr>
@@ -131,15 +140,15 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
-if has('nvim')
-  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'w0rp/ale'
-elseif !has('nvim')
-  Plug 'Shougo/unite.vim'
-  Plug 'ujihisa/unite-colorscheme'
-  Plug 'Shougo/neocomplete.vim'
-endif
+"if has('nvim')
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'w0rp/ale'
+"elseif !has('nvim')
+Plug 'Shougo/unite.vim'
+Plug 'ujihisa/unite-colorscheme'
+Plug 'Shougo/neocomplete.vim'
+"endif
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -147,11 +156,12 @@ Plug 'LeafCage/yankround.vim'
 Plug 'Shougo/neoyank.vim'
 Plug 'vim-scripts/mru.vim'
 Plug 'Shougo/neomru.vim'
-Plug 'bronson/vim-trailing-whitespace'
+Plug 'scrooloose/nerdtree'
 
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'tpope/vim-endwise'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'Shougo/vimshell.vim'
 Plug 'tpope/vim-fugitive'
@@ -159,16 +169,16 @@ Plug 'airblade/vim-gitgutter'
 
 Plug 'itchyny/lightline.vim'
 Plug 'glidenote/memolist.vim'
+Plug 'bronson/vim-trailing-whitespace'
 
 if has('nvim')
-  let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
 elseif !has('nvim')
-  let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_at_startup = 1
 endif
 "Plug 'ujihisa/neco-look'
 Plug 'pbogut/deoplete-elm'
 Plug 'elmcast/elm-vim'
-
 
 "Plug 'rking/ag.vim'
 "Plug 'kassio/neoterm'
@@ -209,14 +219,14 @@ elseif !has ('nvim')
 end
 
 " -- // keep terminal background color
-  autocmd ColorScheme * highlight Normal ctermbg=none guibg=none
-  autocmd ColorScheme * highlight LineNr ctermbg=none guibg=none
+autocmd ColorScheme * highlight Normal ctermbg=none guibg=none
+autocmd ColorScheme * highlight LineNr ctermbg=none guibg=none
 " autocmd ColorScheme * highlight LineNr ctermfg=none guifg=none
-  autocmd ColorScheme * highlight Pmenu guibg=#606060
-  autocmd ColorScheme * highlight PmenuSel guifg=#dddd00 guibg=#1f82cd
-  autocmd ColorScheme * highlight PmenuSbar guibg=#d6d6d6
-  autocmd ColorScheme * highlight PmenuThumb guifg=#3cac3c
-  syntax on
+autocmd ColorScheme * highlight Pmenu guibg=#606060
+autocmd ColorScheme * highlight PmenuSel guifg=#dddd00 guibg=#1f82cd
+autocmd ColorScheme * highlight PmenuSbar guibg=#d6d6d6
+autocmd ColorScheme * highlight PmenuThumb guifg=#3cac3c
+syntax on
 
 " -- // vimshell
 let g:vimshell_prompt_expr = 'getcwd()." $ "'
@@ -283,6 +293,7 @@ endif
 
 " statusline
 " based on "http://qiita.com/tashua314/items/101f1bec368c75a90251"
+if !has('nvim')
 " ステータスラインを常に表示(0:表示しない、1:2つ以上ウィンドウがある時だけ表示)
 set laststatus=2
 " ファイル名表示
@@ -305,6 +316,7 @@ let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 " 現在行数/全行数
 "set statusline+=[LOW=%l/%L]
 set statusline+=\ |
+endif
 
 " syntastic
 " set statusline+=%#warningmsg#
@@ -385,9 +397,18 @@ if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
 
+" -- // nerdtree
+let g:NERDTreeMinimalUI=1
+let g:NERDTreeShowBookmarks=1
+"let g:NERDTreeShowHidden=1
+
+
+" autoclose
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+
 " -- // denite.nvim
 if has('nvim')
-
 " call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
   call denite#custom#var('file_rec', 'command', ['rg', '--files', '--glob', '!.git', ''])
   call denite#custom#source('file_rec', 'matchers', ['mather_fuzzy'])
@@ -573,8 +594,6 @@ set list
 set wildmenu
 " コマンドを画面の最下部に表示する
 set showcmd
-" クリップボードを共有する(設定しないとvimとのコピペが面倒です)
-"set clipboard=unnamed
 
 " 改行時にインデントを引き継いで改行する
 set autoindent

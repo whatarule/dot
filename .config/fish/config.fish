@@ -4,6 +4,8 @@ set -x PATH $HOME/.nvm/versions/node/v7.7.1/bin $PATH
 alias v '/usr/bin/nvim'
 alias e '/usr/bin/emacs'
 
+alias p '/usr/bin/python3'
+
 alias rm 'trash'
 alias gdrive gdrive-linux-x64
 
