@@ -1,5 +1,15 @@
 
+# stack
+set -x PATH $HOME/.local/bin $PATH
+
+# node
 set -x PATH $HOME/.nvm/versions/node/v7.7.1/bin $PATH
+
+# golang
+set -x GOPATH $HOME/go
+set -x PATH $GOPATH/bin $PATH
+
+#set -x PKG_CONFIG_PATH /usr/lib/pkgconfig
 
 alias v '/usr/bin/nvim'
 alias e '/usr/bin/emacs'

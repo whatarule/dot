@@ -3,10 +3,10 @@
 ! ###
 
 remove lock = Eisu_toggle
-remove mod4 = Super_L Super_R
+! remove mod4 = Super_L Super_R
 remove mod4 = Control_L Control_R
 remove control = Control_L Control_R
-remove control = Super_L Super_R
+! remove control = Super_L Super_R
 remove mod5 = Mode_switch
 
 
@@ -18,7 +18,8 @@ keycode   8 =
 keycode   9 = Escape NoSymbol Escape
 keycode  10 = 1 exclam 1 exclam
 keycode  11 = 2 quotedbl 2 quotedbl
-keycode  12 = 3 numbersign 3 numbersign
+!keycode  12 = 3 numbersign 3 numbersign
+keycode  12 = 3 numbersign 3 Print
 keycode  13 = 4 dollar 4 dollar
 keycode  14 = 5 percent 5 percent
 keycode  15 = 6 ampersand 6 ampersand
@@ -277,6 +278,7 @@ keycode 255 =
 ! ###
 ! add lock = Eisu_toggle
 ! add mod4 = Super_L Super_R
+
   add control = Control_L Control_R
   add mod5 = Mode_switch
 

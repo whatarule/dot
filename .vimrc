@@ -87,7 +87,8 @@ noremap <C-t> :<C-u>tabnew<cr>
 "noremap <C-t> :<C-u>Denite buffer -immediately -default-action=tabopen <cr>
 noremap <A-tab> gt
 noremap! <A-tab> gt
-"noremap <S-A-tab> gT
+noremap <S-tab> gT
+noremap! <S-tab> gT
 
 " terminal mode for neovim
 if has('nvim')
@@ -107,6 +108,7 @@ tnoremap <A-k> <C-w>k
 tnoremap <A-h> <C-w>h
 tnoremap <C-t> <C-\><C-n>:<C-u>tabnew<cr>
 tnoremap <A-tab> <C-\><C-n>gt
+tnoremap <S-tab> <C-\><C-n>gT
 tnoremap ZZ <C-\><C-n>:q<cr>
 endif
 
@@ -132,6 +134,28 @@ endif
 "noremap <C-:> q:
 "noremap! <C-:> q:
 
+" python
+augroup Python
+  autocmd!
+  autocmd FileType python setl autoindent
+  autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+  autocmd FileType python setl tabstop=2 expandtab shiftwidth=2 softtabstop=2
+augroup end
+
+unlet! g:python_highlight_all
+unlet! g:python_no_doctest_code_highlight
+unlet! g:python_no_doctest_highlight
+
+" let gpython_highlight_all = 0
+" let g:python_no_doctest_code_highlight = 1
+  let g:python_no_doctest_highlight = 1
+
+" rust
+augroup Rust
+  autocmd!
+  autocmd FileType rust setl tabstop=2 expandtab shiftwidth=2 softtabstop=2
+augroup end
+
 
 " -- // plugin
 
@@ -139,6 +163,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'vim-scripts/camelcasemotion'
 
 "if has('nvim')
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -156,12 +181,14 @@ Plug 'LeafCage/yankround.vim'
 Plug 'Shougo/neoyank.vim'
 Plug 'vim-scripts/mru.vim'
 Plug 'Shougo/neomru.vim'
+
 Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'tpope/vim-endwise'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'Shougo/vimshell.vim'
 Plug 'tpope/vim-fugitive'
@@ -177,8 +204,18 @@ elseif !has('nvim')
 let g:neocomplete#enable_at_startup = 1
 endif
 "Plug 'ujihisa/neco-look'
+Plug 'ujihisa/neco-ghc'
 Plug 'pbogut/deoplete-elm'
 Plug 'elmcast/elm-vim'
+Plug 'derekwyatt/vim-scala'
+Plug 'rust-lang/rust.vim'
+"Plug 'FrigoEU/psc-ide-vim'
+Plug 'purescript-contrib/purescript-vim'
+
+Plug 'gre/play2vim'
+Plug 'digitaltoad/vim-pug'
+Plug 'statianzo/vim-jade'
+"au BufRead,BufNewFile,BufReadPre *.jade set filetype=pug
 
 "Plug 'rking/ag.vim'
 "Plug 'kassio/neoterm'
@@ -326,11 +363,13 @@ endif
 
 " -- // ale
 let g:ale_emit_conflict_warnings = 0
-"let g:ale_linters = {
-"  \    'elm': ['make']
-"  \}
-" \    'vim': ['vint']
-" \,   'elm': ['make']
+let g:ale_linters = {
+  \  'haskell': ['ghc-mod','hlint']
+  \, 'scala': ['scalac']
+  \, 'elm': []
+  \, 'java': []
+  \}
+" \  'vim': ['vint']
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
@@ -346,7 +385,7 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 " -- // elm-vim
 " syntastic
-let g:elm_syntastic_show_warnings = 1
+"   let g:elm_syntastic_show_warnings = 1
 " neocomplete
 if has('nvim')
 " call deoplete#util#set_default_dictionary(
@@ -398,13 +437,14 @@ if has('conceal')
 endif
 
 " -- // nerdtree
+let g:nerdtree_tabs_open_on_console_startup=1
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeShowBookmarks=1
 "let g:NERDTreeShowHidden=1
 
 
 " autoclose
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTred") && b:NERDTree.isTabTree()) | q | endif
 
 
 " -- // denite.nvim
