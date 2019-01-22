@@ -246,7 +246,7 @@ call plug#end()
 
 set t_Co=256
 if has('nvim')
-  set termguicolors
+" set termguicolors
   colorscheme iceberg
 " colorscheme wolfpack
 elseif !has ('nvim')
@@ -309,9 +309,9 @@ if has('nvim')
   \       'ale': 'ALEStatus'
   \     }
   \}
-  function! ALEStatus()
-    return ALEGetStatusLine()
-  endfunction
+  "function! ALEStatus()
+  "  return ALEGetStatusLine()
+  "endfunction
 else
   let g:lightline = {
   \   'colorscheme': 'seoul256',
