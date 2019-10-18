@@ -1,4 +1,7 @@
 
+# sdkman
+set -x PATH $HOME/.sdkman/candidates/kotlin/1.3.20/bin $PATH
+
 # stack
 set -x PATH $HOME/.local/bin $PATH
 
@@ -16,7 +19,7 @@ alias e '/usr/bin/emacs'
 
 alias p '/usr/bin/python3'
 
-alias rm 'trash'
+#alias rm 'trash'
 alias gdrive gdrive-linux-x64
 
 set -x FZF_DEFAULT_COMMAND 'find .'

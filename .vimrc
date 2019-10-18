@@ -15,6 +15,9 @@ set shell=bash
 "set clipboard+=unnamed
 set clipboard+=unnamedplus
 
+let mapleader = "\<Space>"
+nnoremap <Leader>a :echo "Hello"<CR>
+
 " -- // vimrc
 noremap <C-d>e :<C-u>edit $MYVIMRC<cr>
 noremap <C-d>s :<C-u>write<cr>:<C-u>source $MYVIMRC<cr>
@@ -23,7 +26,6 @@ noremap <C-d>s :<C-u>write<cr>:<C-u>source $MYVIMRC<cr>
 " cancellation
 noremap <C-j> <esc>
 noremap! <C-j> <esc>
-"noremap jj <esc>
 noremap! jj <esc>
 nnoremap <silent><esc> :nohlsearch<cr>
 nnoremap <C-j> :nohlsearch<cr>
@@ -69,19 +71,19 @@ set splitright
 set splitbelow
 noremap <C-s> :<C-u>vsplit<cr>
 noremap! <C-s> <esc> :<C-u>vsplit<cr>
-noremap <A-l> <C-w>l
-noremap <A-j> <C-w>j
-noremap <A-k> <C-w>k
-noremap <A-h> <C-w>h
-noremap! <A-l> <C-w>l
+noremap <C-l> <C-w>l
+noremap <C-g> <C-w>j
+noremap <C-t>t <C-w>k
+noremap <C-h> <C-w>h
+noremap! <C-l> <C-w>l
 noremap! <A-j> <C-w>j
 noremap! <A-k> <C-w>k
-noremap! <A-h> <C-w>h
+noremap! <C-h> <C-w>h
 "noremap <C-\> <C-w>|
 "noremap <C-^> <C-w>=
 
 " tab control
-noremap <C-t> :<C-u>tabnew<cr>
+noremap <S-t> :<C-u>tabnew<cr>
 "noremap <C-t> :<C-u>tabnew<cr>:<C-u>cd<cr>:<C-u>FZF<cr>
 "noremap <C-t> :<C-u>tabnew<cr>:<C-u>Denite -resume -immediately <cr>
 "noremap <C-t> :<C-u>Denite buffer -immediately -default-action=tabopen <cr>
@@ -156,6 +158,11 @@ augroup Rust
   autocmd FileType rust setl tabstop=2 expandtab shiftwidth=2 softtabstop=2
 augroup end
 
+" go
+"autocmd BufNewFile,BufRead *.go.tpl setfiletype go
+au BufRead,BufNewFile *.gohtml set filetype=gohtmltmpl
+au BufRead,BufNewFile *.go.tpl set filetype=gohtmltmpl
+"autocmd BufNewFile,BufRead *.gohtml set hetype=cs
 
 " -- // plugin
 
@@ -184,7 +191,7 @@ Plug 'Shougo/neomru.vim'
 
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
@@ -206,12 +213,31 @@ endif
 "Plug 'ujihisa/neco-look'
 Plug 'ujihisa/neco-ghc'
 Plug 'pbogut/deoplete-elm'
+Plug 'cespare/vim-toml'
+
 Plug 'elmcast/elm-vim'
 Plug 'derekwyatt/vim-scala'
 Plug 'rust-lang/rust.vim'
 "Plug 'FrigoEU/psc-ide-vim'
 Plug 'purescript-contrib/purescript-vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'udalov/kotlin-vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'pangloss/vim-javascript'
+Plug 'jonsmithers/vim-html-template-literals'
 
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+"au BufRead,BufNewFile *.java set filetype=java
+au BufRead,BufNewFile *.sbt set filetype=scala
+"au BufRead,BufNewFile *.groovy set filetype=groovy
+
+Plug 'rustushki/JavaImp.vim'
+let g:JavaImpPaths =
+  \ "/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home,".
+  \ $CLASSPATH
+
+Plug 'mattn/emmet-vim'
+Plug 'Galooshi/vim-import-js'
 Plug 'gre/play2vim'
 Plug 'digitaltoad/vim-pug'
 Plug 'statianzo/vim-jade'
@@ -355,20 +381,27 @@ let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 set statusline+=\ |
 endif
 
-" syntastic
+
+" -- // syntastic
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
 " set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+
 
 
 " -- // ale
 let g:ale_emit_conflict_warnings = 0
 let g:ale_linters = {
   \  'haskell': ['ghc-mod','hlint']
-  \, 'scala': ['scalac']
+  \, 'scala': ['javac', 'scalac']
   \, 'elm': []
-  \, 'java': []
+  \, 'java': ['scalac']
   \}
+" \, 'kotlin': ['ale-kotlin']
 " \  'vim': ['vint']
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '>>'
@@ -383,7 +416,10 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 "let g:ale_keep_list_window_open = 1
 
 
-" -- // elm-vim
+"--// vim-go
+let g:go_fmt_command = "goimports"
+
+"--// elm-vim
 " syntastic
 "   let g:elm_syntastic_show_warnings = 1
 " neocomplete
@@ -440,8 +476,7 @@ endif
 let g:nerdtree_tabs_open_on_console_startup=1
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeShowBookmarks=1
-"let g:NERDTreeShowHidden=1
-
+let g:NERDTreeShowHidden=1
 
 " autoclose
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTred") && b:NERDTree.isTabTree()) | q | endif
@@ -578,12 +613,6 @@ let g:neocomplete#text_mode_filetypes = { "_" : 1 }
 
 " -- // neoterm
 "let g:neoterm_position = 'vertical'
-
-" -- // syntastic
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
 
 
 
