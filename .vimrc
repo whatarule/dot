@@ -23,6 +23,9 @@ noremap <C-d>e :<C-u>edit $MYVIMRC<cr>
 noremap <C-d>s :<C-u>write<cr>:<C-u>source $MYVIMRC<cr>
 
 " -- // keymap
+" for us keyboard
+nnoremap ; :
+nnoremap : ;
 " cancellation
 noremap <C-j> <esc>
 noremap! <C-j> <esc>
@@ -160,9 +163,9 @@ augroup end
 
 " go
 "autocmd BufNewFile,BufRead *.go.tpl setfiletype go
-au BufRead,BufNewFile *.gohtml set filetype=gohtmltmpl
+"au BufRead,BufNewFile *.gohtml set filetype=gohtmltmpl
 au BufRead,BufNewFile *.go.tpl set filetype=gohtmltmpl
-"autocmd BufNewFile,BufRead *.gohtml set hetype=cs
+autocmd BufNewFile,BufRead *.gohtml set hetype=cs
 
 " -- // plugin
 
@@ -226,7 +229,9 @@ Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'jonsmithers/vim-html-template-literals'
 
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+"Plug 'neoclide/coc.nvim', {'do': { -> coc#util#build()}}
 "au BufRead,BufNewFile *.java set filetype=java
 au BufRead,BufNewFile *.sbt set filetype=scala
 "au BufRead,BufNewFile *.groovy set filetype=groovy
@@ -238,6 +243,8 @@ let g:JavaImpPaths =
 
 Plug 'mattn/emmet-vim'
 Plug 'Galooshi/vim-import-js'
+Plug 'kristijanhusak/vim-js-file-import'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'gre/play2vim'
 Plug 'digitaltoad/vim-pug'
 Plug 'statianzo/vim-jade'
@@ -397,11 +404,11 @@ endif
 let g:ale_emit_conflict_warnings = 0
 let g:ale_linters = {
   \  'haskell': ['ghc-mod','hlint']
-  \, 'scala': ['javac', 'scalac']
+  \, 'scala': ['scalac']
   \, 'elm': []
   \, 'java': ['scalac']
+  \, 'kotlin': ['ale-kotlin']
   \}
-" \, 'kotlin': ['ale-kotlin']
 " \  'vim': ['vint']
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '>>'
@@ -673,7 +680,7 @@ set softtabstop=2
 " <Tab>押下時に<Tab>ではなく、ホワイトスペースを挿入する
 set expandtab
 " <Tab>が対応する空白の数
-set tabstop=2
+set tabstop=32
 
 " インクリメント、デクリメントを16進数にする(0x0とかにしなければ10進数です。007をインクリメントすると010になるのはデフォルト設定が8進数のため)
 set nf=hex
