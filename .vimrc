@@ -26,6 +26,8 @@ noremap <C-d>s :<C-u>write<cr>:<C-u>source $MYVIMRC<cr>
 " for us keyboard
 nnoremap ; :
 nnoremap : ;
+vnoremap ; :
+vnoremap : ;
 " cancellation
 noremap <C-j> <esc>
 noremap! <C-j> <esc>
@@ -178,6 +180,7 @@ Plug 'vim-scripts/camelcasemotion'
 "if has('nvim')
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'w0rp/ale'
 "elseif !has('nvim')
 Plug 'Shougo/unite.vim'
@@ -491,6 +494,22 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTred") && b:NERDTree.isT
 
 " -- // denite.nvim
 if has('nvim')
+  autocmd FileType denite call s:denite_my_settings()
+  function! s:denite_my_settings() abort
+    nnoremap <silent><buffer><expr> <CR>
+    \ denite#do_map('do_action')
+    nnoremap <silent><buffer><expr> d
+    \ denite#do_map('do_action', 'delete')
+    nnoremap <silent><buffer><expr> p
+    \ denite#do_map('do_action', 'preview')
+    nnoremap <silent><buffer><expr> q
+    \ denite#do_map('quit')
+    nnoremap <silent><buffer><expr> i
+    \ denite#do_map('open_filter_buffer')
+    nnoremap <silent><buffer><expr> <Space>
+    \ denite#do_map('toggle_select').'j'
+  endfunction
+
 " call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
   call denite#custom#var('file_rec', 'command', ['rg', '--files', '--glob', '!.git', ''])
   call denite#custom#source('file_rec', 'matchers', ['mather_fuzzy'])
@@ -680,7 +699,7 @@ set softtabstop=2
 " <Tab>押下時に<Tab>ではなく、ホワイトスペースを挿入する
 set expandtab
 " <Tab>が対応する空白の数
-set tabstop=32
+set tabstop=2
 
 " インクリメント、デクリメントを16進数にする(0x0とかにしなければ10進数です。007をインクリメントすると010になるのはデフォルト設定が8進数のため)
 set nf=hex
