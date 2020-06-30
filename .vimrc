@@ -1,4 +1,122 @@
 
+" -- // plugin
+
+" -- // vim-plug
+call plug#begin('~/.vim/plugged')
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'vim-scripts/camelcasemotion'
+
+"if has('nvim')
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'w0rp/ale'
+"elseif !has('nvim')
+Plug 'Shougo/unite.vim'
+Plug 'ujihisa/unite-colorscheme'
+Plug 'Shougo/neocomplete.vim'
+"endif
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'LeafCage/yankround.vim'
+Plug 'Shougo/neoyank.vim'
+Plug 'vim-scripts/mru.vim'
+Plug 'Shougo/neomru.vim'
+
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+"Plug 'Xuyuanp/nerdtree-git-plugin'
+
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'tpope/vim-endwise'
+
+Plug 'Shougo/vimshell.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+Plug 'itchyny/lightline.vim'
+Plug 'glidenote/memolist.vim'
+Plug 'bronson/vim-trailing-whitespace'
+
+if has('nvim')
+let g:deoplete#enable_at_startup = 1
+elseif !has('nvim')
+let g:neocomplete#enable_at_startup = 1
+endif
+"Plug 'ujihisa/neco-look'
+Plug 'ujihisa/neco-ghc'
+Plug 'pbogut/deoplete-elm'
+Plug 'cespare/vim-toml'
+
+Plug 'derekwyatt/vim-scala'
+Plug 'udalov/kotlin-vim'
+Plug 'rust-lang/rust.vim'
+"Plug 'FrigoEU/psc-ide-vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'liquidz/vim-iced' ", {'for': 'clojure'}
+let g:iced_enable_default_key_mappings = v:true
+Plug 'guns/vim-sexp' ", {'for': 'clojure'}
+Plug 'tpope/vim-sexp-mappings-for-regular-people' ", {'for': 'clojure'}
+Plug 'tpope/vim-repeat' ", {'for': 'clojure'}
+Plug 'tpope/vim-surround' ", {'for': 'clojure'}
+Plug 'jiangmiao/auto-pairs'
+Plug 'bhurlow/vim-parinfer'
+
+Plug 'leafgarland/typescript-vim'
+Plug 'pangloss/vim-javascript'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install'  }
+Plug 'jonsmithers/vim-html-template-literals'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+"Plug 'neoclide/coc.nvim', {'do': { -> coc#util#build()}}
+"au BufRead,BufNewFile *.java set filetype=java
+au BufRead,BufNewFile *.sbt set filetype=scala
+"au BufRead,BufNewFile *.groovy set filetype=groovy
+
+Plug 'rustushki/JavaImp.vim'
+let g:JavaImpPaths =
+  \ "/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home,".
+  \ $CLASSPATH
+
+Plug 'mattn/emmet-vim'
+Plug 'Galooshi/vim-import-js'
+Plug 'kristijanhusak/vim-js-file-import'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'gre/play2vim'
+Plug 'digitaltoad/vim-pug'
+Plug 'statianzo/vim-jade'
+"au BufRead,BufNewFile,BufReadPre *.jade set filetype=pug
+
+"Plug 'rking/ag.vim'
+"Plug 'kassio/neoterm'
+"Plug 'vim-syntastic/syntastic'
+
+" -- // colorscheme
+Plug 'joshdick/onedark.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'aereal/vim-colors-japanesque'
+Plug 'vim-scripts/oceandeep'
+Plug 'elmindreda/vimcolors'
+Plug 'demorose/up.vim'
+Plug 'andrwb/vim-lapis256'
+Plug 'vyshane/vydark-vim-color'
+Plug 'gregsexton/Muon'
+Plug 'lxmzhv/vim'
+Plug 'romainl/Apprentice'
+Plug 'noahfrederick/vim-hemisu'
+Plug 'marlun/vim-starwars'
+Plug 'jonathanfilip/vim-lucius'
+Plug 'vim-scripts/vilight.vim'
+Plug 'nanotech/jellybeans.vim'
+Plug 'thomd/vim-wasabi-colorscheme'
+
+Plug 'carlson-erik/wolfpack'
+Plug 'cocopon/iceberg.vim'
+call plug#end()
+
 " -- // initialize
 "set all&
 autocmd!
@@ -16,7 +134,9 @@ set shell=bash
 set clipboard+=unnamedplus
 
 let mapleader = "\<Space>"
-nnoremap <Leader>a :echo "Hello"<CR>
+"<Leader>a :echo "Hello"<CR>
+nnoremap <Space> <Nop>
+let maplocalleader=" "
 
 " -- // vimrc
 noremap <C-d>e :<C-u>edit $MYVIMRC<cr>
@@ -169,116 +289,9 @@ augroup end
 au BufRead,BufNewFile *.go.tpl set filetype=gohtmltmpl
 autocmd BufNewFile,BufRead *.gohtml set hetype=cs
 
-" -- // plugin
+" toml
+au BufRead,BufNewFile .air.conf set filetype=toml
 
-" -- // vim-plug
-
-call plug#begin('~/.vim/plugged')
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'vim-scripts/camelcasemotion'
-
-"if has('nvim')
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'w0rp/ale'
-"elseif !has('nvim')
-Plug 'Shougo/unite.vim'
-Plug 'ujihisa/unite-colorscheme'
-Plug 'Shougo/neocomplete.vim'
-"endif
-
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'LeafCage/yankround.vim'
-Plug 'Shougo/neoyank.vim'
-Plug 'vim-scripts/mru.vim'
-Plug 'Shougo/neomru.vim'
-
-Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-"Plug 'Xuyuanp/nerdtree-git-plugin'
-
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'tpope/vim-endwise'
-
-Plug 'Shougo/vimshell.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-
-Plug 'itchyny/lightline.vim'
-Plug 'glidenote/memolist.vim'
-Plug 'bronson/vim-trailing-whitespace'
-
-if has('nvim')
-let g:deoplete#enable_at_startup = 1
-elseif !has('nvim')
-let g:neocomplete#enable_at_startup = 1
-endif
-"Plug 'ujihisa/neco-look'
-Plug 'ujihisa/neco-ghc'
-Plug 'pbogut/deoplete-elm'
-Plug 'cespare/vim-toml'
-
-Plug 'elmcast/elm-vim'
-Plug 'derekwyatt/vim-scala'
-Plug 'rust-lang/rust.vim'
-"Plug 'FrigoEU/psc-ide-vim'
-Plug 'purescript-contrib/purescript-vim'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'udalov/kotlin-vim'
-Plug 'leafgarland/typescript-vim'
-Plug 'pangloss/vim-javascript'
-Plug 'jonsmithers/vim-html-template-literals'
-
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-"Plug 'neoclide/coc.nvim', {'do': { -> coc#util#build()}}
-"au BufRead,BufNewFile *.java set filetype=java
-au BufRead,BufNewFile *.sbt set filetype=scala
-"au BufRead,BufNewFile *.groovy set filetype=groovy
-
-Plug 'rustushki/JavaImp.vim'
-let g:JavaImpPaths =
-  \ "/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home,".
-  \ $CLASSPATH
-
-Plug 'mattn/emmet-vim'
-Plug 'Galooshi/vim-import-js'
-Plug 'kristijanhusak/vim-js-file-import'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'gre/play2vim'
-Plug 'digitaltoad/vim-pug'
-Plug 'statianzo/vim-jade'
-"au BufRead,BufNewFile,BufReadPre *.jade set filetype=pug
-
-"Plug 'rking/ag.vim'
-"Plug 'kassio/neoterm'
-"Plug 'vim-syntastic/syntastic'
-
-" -- // colorscheme
-Plug 'joshdick/onedark.vim'
-Plug 'altercation/vim-colors-solarized'
-Plug 'aereal/vim-colors-japanesque'
-Plug 'vim-scripts/oceandeep'
-Plug 'elmindreda/vimcolors'
-Plug 'demorose/up.vim'
-Plug 'andrwb/vim-lapis256'
-Plug 'vyshane/vydark-vim-color'
-Plug 'gregsexton/Muon'
-Plug 'lxmzhv/vim'
-Plug 'romainl/Apprentice'
-Plug 'noahfrederick/vim-hemisu'
-Plug 'marlun/vim-starwars'
-Plug 'jonathanfilip/vim-lucius'
-Plug 'vim-scripts/vilight.vim'
-Plug 'nanotech/jellybeans.vim'
-Plug 'thomd/vim-wasabi-colorscheme'
-
-Plug 'carlson-erik/wolfpack'
-Plug 'cocopon/iceberg.vim'
-call plug#end()
 
 set t_Co=256
 if has('nvim')
