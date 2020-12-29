@@ -8,7 +8,6 @@ Plug 'vim-scripts/camelcasemotion'
 
 "if has('nvim')
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'w0rp/ale'
 "elseif !has('nvim')
@@ -40,14 +39,8 @@ Plug 'itchyny/lightline.vim'
 Plug 'glidenote/memolist.vim'
 Plug 'bronson/vim-trailing-whitespace'
 
-if has('nvim')
-let g:deoplete#enable_at_startup = 1
-elseif !has('nvim')
-let g:neocomplete#enable_at_startup = 1
-endif
 "Plug 'ujihisa/neco-look'
 Plug 'ujihisa/neco-ghc'
-Plug 'pbogut/deoplete-elm'
 Plug 'cespare/vim-toml'
 
 Plug 'derekwyatt/vim-scala'
@@ -55,6 +48,11 @@ Plug 'udalov/kotlin-vim'
 Plug 'rust-lang/rust.vim'
 "Plug 'FrigoEU/psc-ide-vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+"Plug 'Olical/conjure', {'tag': 'v4.2.0'}
+"Plug 'tpope/vim-dispatch'
+"Plug 'clojure-vim/vim-jack-in'
+"Plug 'radenling/vim-dispatch-neovim'
 Plug 'liquidz/vim-iced' ", {'for': 'clojure'}
 let g:iced_enable_default_key_mappings = v:true
 Plug 'guns/vim-sexp' ", {'for': 'clojure'}
@@ -69,12 +67,59 @@ Plug 'pangloss/vim-javascript'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install'  }
 Plug 'jonsmithers/vim-html-template-literals'
 
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"if has('nvim')
+"let g:deoplete#enable_at_startup = 1
+"elseif !has('nvim')
+"let g:neocomplete#enable_at_startup = 1
+"endif
+"set autochdir
+"Plug 'prabirshrestha/vim-lsp'
+"Plug 'lighttiger2505/deoplete-vim-lsp'
+"Plug 'callmekohei/deoplete-fsharp'
+"Plug 'callmekohei/deopletefs'
+"set runtimepath+=\root\.vim\plugged\deoplete.nvim
+"set runtimepath+=\root\.vim\plugged\deoplete-fsharp
+""autocmd MyAutoCmd VimEnter *.fsx,*.fs call s:foo()
+""function s:foo() abort
+""  call deoplete#custom#option({
+""      \   'auto_refresh_delay' : 20
+""      \ , 'min_pattern_length' : 999
+""      \ , 'ignore_case'        : v:true
+""      \ , 'refresh_always'     : v:false
+""      \ , 'ignore_sources' : {'fsharp':['member']}
+""    \ })
+""  call deoplete#enable()
+""endfunction
+
+"Plug 'mattn/vim-lsp-settings'
+"let g:lsp_settings_servers_dir = '/root/.local/share/vim-lsp-settings/servers'
+
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 "Plug 'neoclide/coc.nvim', {'do': { -> coc#util#build()}}
-"au BufRead,BufNewFile *.java set filetype=java
+"let g:coc_global_extensions = ['coc-conjure']
+xmap <leader>f <Plug>(coc-format-selected)
+nmap <leader>f <Plug>(coc-format-selected)
+
 au BufRead,BufNewFile *.sbt set filetype=scala
-"au BufRead,BufNewFile *.groovy set filetype=groovy
+"au BufRead,BufNewFile *.java set filetype=java
+"au BufRead,BufNewFile *.fs set filetype=fsharp
+au BufRead,BufNewFile *.fsproj set filetype=xml
+
+augroup HTMLANDXML
+  autocmd!
+  autocmd Filetype xml  inoremap <buffer> </ </<C-x><C-o><ESC>F<i
+  autocmd Filetype html inoremap <buffer> </ </<C-x><C-o><ESC>F<i
+augroup END
+
+Plug 'sheerun/vim-polyglot'
+
+"Plug 'fsharp/vim-fsharp', {
+"  \ 'for': 'fsharp',
+"  \ 'do':  'make fsautocomplete',
+"  \}
+"}
 
 Plug 'rustushki/JavaImp.vim'
 let g:JavaImpPaths =
@@ -197,13 +242,13 @@ set splitbelow
 noremap <C-s> :<C-u>vsplit<cr>
 noremap! <C-s> <esc> :<C-u>vsplit<cr>
 noremap <C-l> <C-w>l
-noremap <C-g> <C-w>j
-noremap <C-t>t <C-w>k
+noremap <C-j><C-j> <C-w>j
+noremap <C-k> <C-w>k
 noremap <C-h> <C-w>h
-noremap! <C-l> <C-w>l
-noremap! <A-j> <C-w>j
-noremap! <A-k> <C-w>k
-noremap! <C-h> <C-w>h
+"noremap! <C-l> <C-w>l
+"noremap! <A-j> <C-w>j
+"noremap! <A-k> <C-w>k
+"noremap! <C-h> <C-w>h
 "noremap <C-\> <C-w>|
 "noremap <C-^> <C-w>=
 
@@ -416,7 +461,7 @@ endif
 
 
 
-" -- // ale
+"" -- // ale
 let g:ale_emit_conflict_warnings = 0
 let g:ale_linters = {
   \  'haskell': ['ghc-mod','hlint']
@@ -441,31 +486,6 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 "--// vim-go
 let g:go_fmt_command = "goimports"
-
-"--// elm-vim
-" syntastic
-"   let g:elm_syntastic_show_warnings = 1
-" neocomplete
-if has('nvim')
-" call deoplete#util#set_default_dictionary(
-"   \ 'g:deoplete#sources#omni#input_patterns',
-"   \ 'elm',
-"   \ '\.')
-elseif !has('nvim')
-  call neocomplete#util#set_default_dictionary(
-    \ 'g:neocomplete#sources#omni#input_patterns',
-    \ 'elm',
-    \ '\.')
-endif
-" usage
-let g:elm_jump_to_error = 0
-let g:elm_make_output_file = "elm.js"
-let g:elm_make_show_warnings = 1
-let g:elm_browser_command = ""
-let g:elm_detailed_complete = 1
-let g:elm_format_autosave = 0
-let g:elm_format_fail_silently = 0
-let g:elm_setup_keybindings = 1
 
 " -- // memolist
 let g:memolist_path = expand('~/Dropbox/memorandom')
