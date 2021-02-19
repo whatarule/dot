@@ -327,6 +327,9 @@ unlet! g:python_no_doctest_highlight
 augroup Rust
   autocmd!
   autocmd FileType rust setl tabstop=2 expandtab shiftwidth=2 softtabstop=2
+  syntax enable
+  filetype plugin indent on
+  let g:rustfmt_autosave = 1
 augroup end
 
 " go
