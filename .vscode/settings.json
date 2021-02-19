@@ -1,0 +1,55 @@
+{
+    "editor.tabSize": 2,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.editor.restoreViewState": false,
+    "files.associations": {
+        "Jenkinsfile": "groovy"
+    },
+    //"jenkins-jack.jenkins.connections": [
+    //    {
+    //        "name": "localhost",
+    //        "uri": "http://localhost:8080/jenkins/",
+    //        "username": "komagata",
+    //        "password": "11bddf98ea6c04d1693435109a93286d9a",
+    //        "active": false
+    //    },
+    //],
+    "FSharp.useSdkScripts": true,
+    
+    "vim.easymotion": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true, 
+    "vim.leader": "<space>",
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {"before": [";"], "after": [":"]},
+        {"before": [":"], "after": [";"]},
+        {"before":["<Esc>"], "after":[], "commands": [ {"command": ":nohl"} ] },
+        {"before":["<C-n>"], "after":[], "commands": [ {"command": ":nohl"} ] },
+    ],
+    "vim.insertModeKeyBindings": [
+        {"before": ["j", "j"], "after": ["<Esc>"]},
+        {"before": ["<C-j>"], "after": ["<Esc>"]}
+    ],
+    "breadcrumbs.showKeys": false,
+    "jenkins-jack.jenkins.connections": [
+        {
+            "name": "aaa",
+            "uri": "http://127.0.0.1:8080/jenkins",
+            "username": "komagata",
+            "password": "11bddf98ea6c04d1693435109a93286d9a",
+            "active": true
+        }
+    ],
+    "files.watcherExclude": {
+        "**/.bloop": true,
+        "**/.metals": true,
+        "**/.ammonite": true
+    },
+    "sqltools.results": {
+        "location": "current"
+    },
+}

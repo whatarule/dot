@@ -1,0 +1,60 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+  {
+    "key": "ctrl+j",
+    "command": "-workbench.action.togglePanel"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "workbench.action.togglePanel",
+    "when": "vim.active && vim.mode == Normal" 
+  },
+  {
+    "key": "ctrl+j",
+    "command": "extension.vim_escape",
+    "when": "vim.active && !(vim.mode == Normal)" 
+  },
+
+  {
+    "key": "ctrl+enter",
+    "command": "-editor.action.insertLineAfter",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+enter",
+    "command": "sqltools.executeCurrentQuery",
+    "when": "editorTextFocus && editorLangId == sql"
+  },
+  {
+    "key": "ctrl+9",
+    "command": "-workbench.action.lastEditorInGroup"
+  },
+  {
+    "key": "ctrl+9",
+    "command": "sqltools.attachFileToConnection"
+  },
+  {
+    "key": "ctrl+9",
+    "command": "sqltools.attachFileToConnection",
+    "when": "editorTextFocus && editorLangId == sql"
+  },
+  {
+    "key": "ctrl+shift+oem_2",
+    "command": "editor.action.blockComment",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+a",
+    "command": "-editor.action.blockComment",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+shift+c",
+    "command": "-workbench.action.terminal.openNativeConsole",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+u",
+    "command": "-workbench.action.output.toggleOutput"
+  }
+]

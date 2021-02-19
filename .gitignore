@@ -1,0 +1,3 @@
+.metals/
+.history/.gitignore_*
+*.log
