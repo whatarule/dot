@@ -34,6 +34,7 @@ Plug 'tpope/vim-endwise'
 Plug 'Shougo/vimshell.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'iberianpig/tig-explorer.vim'
 
 Plug 'itchyny/lightline.vim'
 Plug 'glidenote/memolist.vim'
@@ -196,7 +197,7 @@ vnoremap : ;
 " cancellation
 noremap <C-j> <esc>
 noremap! <C-j> <esc>
-noremap! jj <esc>
+"noremap! jj <esc>
 nnoremap <silent><esc> :nohlsearch<cr>
 nnoremap <C-j> :nohlsearch<cr>
 "nnoremap jj :nohlsearch<cr>
