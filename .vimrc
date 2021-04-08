@@ -1,4 +1,4 @@
-
+"
 " -- // plugin
 
 " -- // vim-plug
@@ -48,7 +48,20 @@ Plug 'derekwyatt/vim-scala'
 Plug 'udalov/kotlin-vim'
 Plug 'rust-lang/rust.vim'
 "Plug 'FrigoEU/psc-ide-vim'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+let g:go_fmt_command = "goimports"
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'darrikonn/vim-gofmt', { 'do': ':GoUpdateBinaries' }
+autocmd BufWritePre *.go :call GoFmt
+"Plug 'mattn/vim-goimports'
+let g:goimports = 1
+"goimport (default)
+let g:goimports_cmd = 'goimports'
+let g:goimports_simplify_cmd = 'gofmt'
+"gofumpt
+let g:goimports_cmd = 'gofumports'
+let g:goimports_simplify_cmd = 'gofumpt'"
 
 "Plug 'Olical/conjure', {'tag': 'v4.2.0'}
 "Plug 'tpope/vim-dispatch'
@@ -109,13 +122,12 @@ au BufRead,BufNewFile *.sbt set filetype=scala
 au BufRead,BufNewFile *.fsproj set filetype=xml
 
 augroup HTMLANDXML
-  autocmd!
-  autocmd Filetype xml  inoremap <buffer> </ </<C-x><C-o><ESC>F<i
-  autocmd Filetype html inoremap <buffer> </ </<C-x><C-o><ESC>F<i
+autocmd!
+autocmd Filetype xml  inoremap <buffer> </ </<C-x><C-o><ESC>F<i
+autocmd Filetype html inoremap <buffer> </ </<C-x><C-o><ESC>F<i
 augroup END
 
-Plug 'sheerun/vim-polyglot'
-
+"Plug 'sheerun/vim-polyglot'
 "Plug 'fsharp/vim-fsharp', {
 "  \ 'for': 'fsharp',
 "  \ 'do':  'make fsautocomplete',
@@ -124,8 +136,8 @@ Plug 'sheerun/vim-polyglot'
 
 Plug 'rustushki/JavaImp.vim'
 let g:JavaImpPaths =
-  \ "/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home,".
-  \ $CLASSPATH
+\ "/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home,".
+\ $CLASSPATH
 
 Plug 'mattn/emmet-vim'
 Plug 'Galooshi/vim-import-js'
@@ -235,7 +247,7 @@ xmap <C-k> <Plug>(neosnippet_expand_target)
 "  \ neosnippet#expandable_or_jumpable() ?
 "  \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
 snoremap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-  \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " window control
 set splitright
@@ -309,10 +321,10 @@ endif
 
 " python
 augroup Python
-  autocmd!
-  autocmd FileType python setl autoindent
-  autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-  autocmd FileType python setl tabstop=2 expandtab shiftwidth=2 softtabstop=2
+autocmd!
+autocmd FileType python setl autoindent
+autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+autocmd FileType python setl tabstop=2 expandtab shiftwidth=2 softtabstop=2
 augroup end
 
 unlet! g:python_highlight_all
@@ -321,15 +333,15 @@ unlet! g:python_no_doctest_highlight
 
 " let gpython_highlight_all = 0
 " let g:python_no_doctest_code_highlight = 1
-  let g:python_no_doctest_highlight = 1
+let g:python_no_doctest_highlight = 1
 
 " rust
 augroup Rust
-  autocmd!
-  autocmd FileType rust setl tabstop=2 expandtab shiftwidth=2 softtabstop=2
-  syntax enable
-  filetype plugin indent on
-  let g:rustfmt_autosave = 1
+autocmd!
+autocmd FileType rust setl tabstop=2 expandtab shiftwidth=2 softtabstop=2
+syntax enable
+filetype plugin indent on
+let g:rustfmt_autosave = 1
 augroup end
 
 " go
@@ -345,10 +357,10 @@ au BufRead,BufNewFile .air.conf set filetype=toml
 set t_Co=256
 if has('nvim')
 " set termguicolors
-  colorscheme iceberg
+colorscheme iceberg
 " colorscheme wolfpack
 elseif !has ('nvim')
-  colorscheme iceberg
+colorscheme iceberg
 " colorscheme default
 " colorscheme elflord
 end
@@ -390,40 +402,40 @@ let g:terminal_color_15 = '#eeeeec'
 
 " -- // lightline
 if has('nvim')
-  let g:lightline = {
-  \   'colorscheme': 'seoul256',
-  \   'active': {
-  \       'left': [
-  \           ['mode','paste'],
-  \           ['readonly','filename','modified'],
-  \           ['ale'],
-  \         ],
-  \       'right': [
-  \           ['percent'],
-  \           ['filetype'],
-  \         ],
-  \     },
-  \   'component_function': {
-  \       'ale': 'ALEStatus'
-  \     }
-  \}
-  "function! ALEStatus()
-  "  return ALEGetStatusLine()
-  "endfunction
+let g:lightline = {
+\   'colorscheme': 'seoul256',
+\   'active': {
+\       'left': [
+\           ['mode','paste'],
+\           ['readonly','filename','modified'],
+\           ['ale'],
+\         ],
+\       'right': [
+\           ['percent'],
+\           ['filetype'],
+\         ],
+\     },
+\   'component_function': {
+\       'ale': 'ALEStatus'
+\     }
+\}
+"function! ALEStatus()
+"  return ALEGetStatusLine()
+"endfunction
 else
-  let g:lightline = {
-  \   'colorscheme': 'seoul256',
-  \   'active': {
-  \       'left': [
-  \           ['mode','paste'],
-  \           ['readonly','filename','modified'],
-  \         ],
-  \       'right': [
-  \           ['percent'],
-  \           ['filetype'],
-  \         ],
-  \     },
-  \}
+let g:lightline = {
+\   'colorscheme': 'seoul256',
+\   'active': {
+\       'left': [
+\           ['mode','paste'],
+\           ['readonly','filename','modified'],
+\         ],
+\       'right': [
+\           ['percent'],
+\           ['filetype'],
+\         ],
+\     },
+\}
 endif
 
 " statusline
@@ -468,12 +480,12 @@ endif
 "" -- // ale
 let g:ale_emit_conflict_warnings = 0
 let g:ale_linters = {
-  \  'haskell': ['ghc-mod','hlint']
-  \, 'scala': ['scalac']
-  \, 'elm': []
-  \, 'java': ['scalac']
-  \, 'kotlin': ['ale-kotlin']
-  \}
+\  'haskell': ['ghc-mod','hlint']
+\, 'scala': ['scalac']
+\, 'elm': []
+\, 'java': ['scalac']
+\, 'kotlin': ['ale-kotlin']
+\}
 " \  'vim': ['vint']
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '>>'
@@ -487,21 +499,17 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 "let g:ale_open_list = 1
 "let g:ale_keep_list_window_open = 1
 
-
-"--// vim-go
-let g:go_fmt_command = "goimports"
-
 " -- // memolist
 let g:memolist_path = expand('~/Dropbox/memorandom')
 let g:memolist_template_dir_path = '~/Dropbox/memorandom/template'
 let g:memolist_memo_suffix = 'mrd'
 
 if has('nvim')
-  let g:memolist_denite = 1
-  let g:memolist_denite_option = '-default-action=vsplit'
+let g:memolist_denite = 1
+let g:memolist_denite_option = '-default-action=vsplit'
 elseif !has('nvim')
-  let g:memolist_unite = 1
-  let g:memolist_unite_option = '-vertical -start-insert'
+let g:memolist_unite = 1
+let g:memolist_unite_option = '-vertical -start-insert'
 endif
 let g:memolist_gfixgrep = 1
 
@@ -516,7 +524,7 @@ autocmd BufWritePre * :FixWhitespace
 " For conceal markers.
 let g:neosnippet#snippets_directory='~/.vim/plugged/neosnippet-snippets/neosnippets'
 if has('conceal')
-  set conceallevel=2 concealcursor=niv
+set conceallevel=2 concealcursor=niv
 endif
 
 " -- // nerdtree
@@ -531,25 +539,25 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTred") && b:NERDTree.isT
 
 " -- // denite.nvim
 if has('nvim')
-  autocmd FileType denite call s:denite_my_settings()
-  function! s:denite_my_settings() abort
-    nnoremap <silent><buffer><expr> <CR>
-    \ denite#do_map('do_action')
-    nnoremap <silent><buffer><expr> d
-    \ denite#do_map('do_action', 'delete')
-    nnoremap <silent><buffer><expr> p
-    \ denite#do_map('do_action', 'preview')
-    nnoremap <silent><buffer><expr> q
-    \ denite#do_map('quit')
-    nnoremap <silent><buffer><expr> i
-    \ denite#do_map('open_filter_buffer')
-    nnoremap <silent><buffer><expr> <Space>
-    \ denite#do_map('toggle_select').'j'
-  endfunction
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+nnoremap <silent><buffer><expr> <CR>
+\ denite#do_map('do_action')
+nnoremap <silent><buffer><expr> d
+\ denite#do_map('do_action', 'delete')
+nnoremap <silent><buffer><expr> p
+\ denite#do_map('do_action', 'preview')
+nnoremap <silent><buffer><expr> q
+\ denite#do_map('quit')
+nnoremap <silent><buffer><expr> i
+\ denite#do_map('open_filter_buffer')
+nnoremap <silent><buffer><expr> <Space>
+\ denite#do_map('toggle_select').'j'
+endfunction
 
 " call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-  call denite#custom#var('file_rec', 'command', ['rg', '--files', '--glob', '!.git', ''])
-  call denite#custom#source('file_rec', 'matchers', ['mather_fuzzy'])
+call denite#custom#var('file_rec', 'command', ['rg', '--files', '--glob', '!.git', ''])
+call denite#custom#source('file_rec', 'matchers', ['mather_fuzzy'])
 
 " call denite#custom#var('grep', 'command', ['ag'])
 " call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
@@ -558,15 +566,15 @@ if has('nvim')
 " call denite#custom#var('grep', 'separator', ['--'])
 " call denite#custom#var('grep', 'final_opts', [])
 
-  call denite#custom#var('grep', 'command', ['rg'])
-  call denite#custom#var('grep', 'default_opts', ['--vimgrep', '--no-heading'])
-  call denite#custom#var('grep', 'recursive_opts', [])
-  call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
-  call denite#custom#var('grep', 'separator', ['--'])
-  call denite#custom#var('grep', 'final_opts', [])
+call denite#custom#var('grep', 'command', ['rg'])
+call denite#custom#var('grep', 'default_opts', ['--vimgrep', '--no-heading'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
 
-  call denite#custom#map('insert', '<C-j>', '<denite:leave_mode>', 'noremap')
-  call denite#custom#map('insert', 'ZZ', '<denite:leave_mode>', 'noremap')
+call denite#custom#map('insert', '<C-j>', '<denite:leave_mode>', 'noremap')
+call denite#custom#map('insert', 'ZZ', '<denite:leave_mode>', 'noremap')
 " call denite#custom#map(
 "       \ 'insert',
 "       \ '<C-j>',
@@ -584,70 +592,70 @@ endif
 " -- // unite.vim
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
 if !has('nvim')
-  let g:unite_source_history_yank_enable = 1
-  try
-    let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
-    call unite#filters#matcher_default#use(['matcher_fuzzy'])
-  catch
-  endtry
+let g:unite_source_history_yank_enable = 1
+try
+let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+catch
+endtry
 endif
 
 " -- // neocomplete.vim
 "Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
 if !has('nvim')
-  " Disable AutoComplPop.
-  let g:acp_enableAtStartup = 0
-  " Use smartcase.
-  let g:neocomplete#enable_smart_case = 1
-  " Set minimum syntax keyword length.
-  let g:neocomplete#sources#syntax#min_keyword_length = 3
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
 
-  " Define dictionary.
-  let g:neocomplete#sources#dictionary#dictionaries = {
-      \ 'default' : '',
-      \ 'vimshell' : $HOME.'/.vimshell_hist',
-      \ 'scheme' : $HOME.'/.gosh_completions'
-          \ }
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+\ 'default' : '',
+\ 'vimshell' : $HOME.'/.vimshell_hist',
+\ 'scheme' : $HOME.'/.gosh_completions'
+  \ }
 
-  " Define keyword.
-  if !exists('g:neocomplete#keyword_patterns')
-      let g:neocomplete#keyword_patterns = {}
-  endif
-  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-  " Plugin key-mappings.
-  inoremap <expr><C-g>     neocomplete#undo_completion()
-  inoremap <expr><C-l>     neocomplete#complete_common_string()
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
 
-  " Recommended key-mappings.
-  " <CR>: close popup and save indent.
-  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-  function! s:my_cr_function()
-    return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-    " For no inserting <CR> key.
-    "return pumvisible() ? "\<C-y>" : "\<CR>"
-  endfunction
-  " <TAB>: completion.
-  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-  " <C-h>, <BS>: close popup and delete backword char.
-  inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-  inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-  " Close popup by <Space>.
-  "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+" For no inserting <CR> key.
+"return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
-  " AutoComplPop like behavior.
-  "let g:neocomplete#enable_auto_select = 1
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
 
-  " Shell like behavior(not recommended).
-  "set completeopt+=longest
-  "let g:neocomplete#enable_auto_select = 1
-  "let g:neocomplete#disable_auto_complete = 1
-  "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
-  " Enable omni completion.
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
