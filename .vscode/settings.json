@@ -53,4 +53,5 @@
     "sqltools.results": {
         "location": "current"
     },
+"editor.formatOnSave": true,
 }
