@@ -723,7 +723,7 @@ set softtabstop=2
 set expandtab
 set tabstop=2
 set nf=hex
-set mouse-=a
+set mouse=a
 
 " :SyntaxInfo
 " form "http://cohama.hateblo.jp/entry/2013/08/11/020849"

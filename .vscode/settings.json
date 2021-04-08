@@ -47,9 +47,11 @@
     "files.watcherExclude": {
         "**/.bloop": true,
         "**/.metals": true,
-        "**/.ammonite": true
+        "**/.ammonite": true,
+        "**/target": true
     },
     "sqltools.results": {
         "location": "current"
     },
+"editor.formatOnSave": true,
 }
