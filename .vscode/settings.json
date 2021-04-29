@@ -17,7 +17,6 @@
     //    },
     //],
     "FSharp.useSdkScripts": true,
-    
     "vim.easymotion": true,
     "vim.incsearch": true,
     "vim.useSystemClipboard": true,
@@ -53,7 +52,10 @@
     "sqltools.results": {
         "location": "current"
     },
+    "window.zoomLevel": 2,
+    "git.suggestSmartCommit": false,
     "terminal.integrated.shell.osx": "/usr/local/bin/fish",
     "terminal.integrated.automationShell.osx": "/usr/local/bin/fish",
-"editor.formatOnSave": true,
+    "editor.formatOnSave": true,
+    "json.format.enable": false,
 }
