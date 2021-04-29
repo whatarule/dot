@@ -53,5 +53,7 @@
     "sqltools.results": {
         "location": "current"
     },
+    "terminal.integrated.shell.osx": "/usr/local/bin/fish",
+    "terminal.integrated.automationShell.osx": "/usr/local/bin/fish",
 "editor.formatOnSave": true,
 }
