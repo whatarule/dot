@@ -1,0 +1,58 @@
+
+" -- // shell
+"set shell=bash
+"set shell=/bin/bash
+"set shell=/bin/bash\ -l\ -O\ expand_aliases
+set shell=fish
+"set shell=/usr/bin/fish
+
+" - // yank
+"set clipboard=unnamed
+"set clipboard+=unnamed
+set clipboard+=unnamedplus
+
+" based on "http://itchyny.hatenablog.com/entry/2014/12/25/090000"
+nnoremap Y y$
+set display=lastline
+set pumheight=10
+set showmatch matchtime=1
+"set showmatch
+"set matchtime=1
+nnoremap + <C-a>
+nnoremap - <C-x>
+augroup swapchoice-readonly
+  autocmd!
+  autocmd SwapExists * let v:swapchoice = 'o'
+augroup END
+
+
+" based on "http://qiita.com/okamos/items/d7fdbee03c4857b1ce20"
+source $VIMRUNTIME/macros/matchit.vim
+let b:match_ignorecase = 1
+
+set nowrap
+set noswapfile
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+set ruler
+set number
+set wildmenu
+set showcmd
+
+set autoindent
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set tabstop=2
+set nf=hex
+set mouse=a
+
+
+set cmdheight=2
+set laststatus=2
+set listchars=tab:^\ ,trail:~
+set whichwrap=b,s,h,l,<,>,[,],~
+set cinoptions+=:0
+

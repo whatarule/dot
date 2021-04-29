@@ -11,6 +11,8 @@ let mapleader = "\<Space>"
 nnoremap <Space> <Nop>
 let maplocalleader=" "
 
+noremap x "_x
+
 " for us keyboard
 nnoremap ; :
 nnoremap : ;
@@ -87,49 +89,4 @@ noremap <A-tab> gt
 noremap! <A-tab> gt
 noremap <S-tab> gT
 noremap! <S-tab> gT
-
-" terminal mode for neovim
-if has('nvim')
-noremap <space><space> :<C-u>terminal<cr><C-u>fish<cr>
-"noremap <space><space> :<C-u>terminal<cr><C-u>fish<cr><C-u>ls -la<cr>
-"noremap <space><space> :<C-u>vsplit<cr>:<C-u>terminal<cr>fish<cr>ls -la<cr>
-"tnoremap <silent> <esc> <C-\><C-n>
-tnoremap jj <C-\><C-n>
-tnoremap <silent><esc> <C-\><C-n>
-tnoremap <C-j> <C-\><C-n>
-tnoremap <C-t> <up>
-tnoremap <C-g> <down>
-tnoremap <C-s> :<C-u>vsplit<cr>
-tnoremap <A-l> <C-w>l
-tnoremap <A-j> <C-w>j
-tnoremap <A-k> <C-w>k
-tnoremap <A-h> <C-w>h
-tnoremap <C-t> <C-\><C-n>:<C-u>tabnew<cr>
-tnoremap <A-tab> <C-\><C-n>gt
-tnoremap <S-tab> <C-\><C-n>gT
-tnoremap ZZ <C-\><C-n>:q<cr>
-endif
-
-" command support
-" fzf
-noremap <C-f>d :<C-u>FZF<cr>
-noremap <C-f>a :<C-u>cd<cr>:<C-u>FZF<cr>
-" denite
-if has('nvim')
-nnoremap <C-d>b :<C-u>Denite buffer <cr>
-nnoremap db :<C-u>Denite buffer <cr>
-nnoremap <C-d>r :<C-u>Denite file_rec <cr>
-nnoremap <C-d>f :<C-u>Denite file_old <cr>
-nnoremap <C-d>m :<C-u>Denite file_mru <cr>
-nnoremap <C-d>y :<C-u>Denite neoyank <cr>
-nnoremap <C-d>l :<C-u>Denite line <cr>
-nnoremap <C-d>g :<C-u>Denite grep <cr>
-nnoremap <C-d>h :<C-u>Denite help <cr>
-" unite
-elseif !has('nvim')
-nnoremap <C-d>f :<C-u>Unite file_rec <cr>
-endif
-" cancellation
-"noremap <C-:> q:
-"noremap! <C-:> q:
 

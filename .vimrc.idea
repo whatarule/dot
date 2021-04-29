@@ -5,8 +5,6 @@ source .vimrc.keymap
 noremap de :<C-u>edit ~/.ideavimrc<cr>
 noremap sr :<C-u>source ~/.ideavimrc<cr>
 
-noremap x "_x
-
 nnoremap gd :action GotoDeclaration<cr>
 nnoremap gi :action GotoImplementation<cr>
 nnoremap fu :action FindUsages<cr>
@@ -17,21 +15,4 @@ noremap cc :action CommentByLineComment<cr>
 
 noremap oi :action OptimizeImports<cr>
 noremap call :action CloseAllEditorsButActive<cr>
-
-set ignorecase
-set smartcase
-set incsearch
-set hlsearch
-set showmatch matchtime=1
-set cmdheight=2
-set laststatus=2
-set showcmd
-set display=lastline
-set listchars=tab:^\ ,trail:~
-set clipboard+=unnamed
-set showmatch
-set whichwrap=b,s,h,l,<,>,[,],~
-set cinoptions+=:0
-set shiftwidth=2
-set softtabstop=2
 

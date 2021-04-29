@@ -1,27 +1,55 @@
 
-source .vimrc.keymap
-source .vimrc.plug
-
 " -- // initialize
 "set all&
 autocmd!
 
-" -- // shell
-"set shell=bash
-"set shell=/bin/bash
-"set shell=/bin/bash\ -l\ -O\ expand_aliases
-set shell=fish
-"set shell=/usr/bin/fish
+source .vimrc.plug
+source .vimrc.set
+source .vimrc.keymap
 
-" - // yank
-"set clipboard=unnamed
-"set clipboard+=unnamed
-set clipboard+=unnamedplus
+" terminal mode for neovim
+if has('nvim')
+noremap <space><space> :<C-u>terminal<cr><C-u>fish<cr>
+"noremap <space><space> :<C-u>terminal<cr><C-u>fish<cr><C-u>ls -la<cr>
+"noremap <space><space> :<C-u>vsplit<cr>:<C-u>terminal<cr>fish<cr>ls -la<cr>
+"tnoremap <silent> <esc> <C-\><C-n>
+tnoremap jj <C-\><C-n>
+tnoremap <silent><esc> <C-\><C-n>
+tnoremap <C-j> <C-\><C-n>
+tnoremap <C-t> <up>
+tnoremap <C-g> <down>
+tnoremap <C-s> :<C-u>vsplit<cr>
+tnoremap <A-l> <C-w>l
+tnoremap <A-j> <C-w>j
+tnoremap <A-k> <C-w>k
+tnoremap <A-h> <C-w>h
+tnoremap <C-t> <C-\><C-n>:<C-u>tabnew<cr>
+tnoremap <A-tab> <C-\><C-n>gt
+tnoremap <S-tab> <C-\><C-n>gT
+tnoremap ZZ <C-\><C-n>:q<cr>
+endif
 
-let mapleader = "\<Space>"
-"<Leader>a :echo "Hello"<CR>
-nnoremap <Space> <Nop>
-let maplocalleader=" "
+" command support
+" fzf
+noremap <C-f>d :<C-u>FZF<cr>
+noremap <C-f>a :<C-u>cd<cr>:<C-u>FZF<cr>
+" denite
+if has('nvim')
+nnoremap <C-d>b :<C-u>Denite buffer <cr>
+nnoremap <C-d>r :<C-u>Denite file_rec <cr>
+nnoremap <C-d>f :<C-u>Denite file_old <cr>
+nnoremap <C-d>m :<C-u>Denite file_mru <cr>
+nnoremap <C-d>y :<C-u>Denite neoyank <cr>
+nnoremap <C-d>l :<C-u>Denite line <cr>
+nnoremap <C-d>g :<C-u>Denite grep <cr>
+nnoremap <C-d>h :<C-u>Denite help <cr>
+" unite
+elseif !has('nvim')
+nnoremap <C-d>f :<C-u>Unite file_rec <cr>
+endif
+" cancellation
+"noremap <C-:> q:
+"noremap! <C-:> q:
 
 " python
 augroup Python
@@ -103,44 +131,6 @@ let g:terminal_color_12 = '#729fcf'
 let g:terminal_color_13 = '#ad7fa8'
 let g:terminal_color_14 = '#00f5e9'
 let g:terminal_color_15 = '#eeeeec'
-
-" -- // basic configuration
-
-" based on "http://itchyny.hatenablog.com/entry/2014/12/25/090000"
-nnoremap Y y$
-set display=lastline
-set pumheight=10
-set showmatch
-set matchtime=1
-nnoremap + <C-a>
-nnoremap - <C-x>
-augroup swapchoice-readonly
-  autocmd!
-  autocmd SwapExists * let v:swapchoice = 'o'
-augroup END
-
-
-" based on "http://qiita.com/okamos/items/d7fdbee03c4857b1ce20"
-source $VIMRUNTIME/macros/matchit.vim
-let b:match_ignorecase = 1
-
-set nowrap
-set noswapfile
-set hlsearch
-set ignorecase
-set smartcase
-set ruler
-set number
-set wildmenu
-set showcmd
-
-set autoindent
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-set tabstop=2
-set nf=hex
-set mouse=a
 
 " :SyntaxInfo
 " form "http://cohama.hateblo.jp/entry/2013/08/11/020849"

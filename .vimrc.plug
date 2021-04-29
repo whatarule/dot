@@ -197,7 +197,6 @@ let g:lightline = {
 \         ],
 \     },
 \   'component_function': {
-
 \       'ale': 'ALEStatus'
 \     }
 \}
