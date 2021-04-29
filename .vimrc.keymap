@@ -6,6 +6,11 @@ noremap <C-d>s :<C-u>write<cr>:<C-u>source $MYVIMRC<cr>
 noremap sr :<C-u>write<cr>:<C-u>source $MYVIMRC<cr>
 
 " -- // keymap
+let mapleader = "\<Space>"
+"<Leader>a :echo "Hello"<CR>
+nnoremap <Space> <Nop>
+let maplocalleader=" "
+
 " for us keyboard
 nnoremap ; :
 nnoremap : ;
@@ -13,9 +18,12 @@ vnoremap ; :
 vnoremap : ;
 " cancellation
 noremap <C-j> <esc>
-noremap! <C-j> <esc>
+"noremap! <C-j> <esc>
+inoremap <C-j> <esc>
+cnoremap <C-j> <esc>
 "noremap! jj <esc>
 nnoremap <silent><esc> :nohlsearch<cr>
+nnoremap <esc><esc> :nohlsearch<cr>
 nnoremap <C-j> :nohlsearch<cr>
 "nnoremap jj :nohlsearch<cr>
 
