@@ -1,0 +1,59 @@
+
+noremap de :<C-u>edit ~/.ideavimrc<cr>
+noremap sr :<C-u>source ~/.ideavimrc<cr>
+
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+set showmatch matchtime=1
+set cmdheight=2
+set laststatus=2
+set showcmd
+set display=lastline
+set listchars=tab:^\ ,trail:~
+set clipboard+=unnamed
+set showmatch
+set whichwrap=b,s,h,l,<,>,[,],~
+set cinoptions+=:0
+set shiftwidth=2
+set softtabstop=2
+
+noremap x "_x
+
+nnoremap gd :action GotoDeclaration<cr>
+nnoremap gi :action GotoImplementation<cr>
+nnoremap fu :action FindUsages<cr>
+nnoremap <C-f> :action FindInPath<cr>
+nnoremap ff :action SelectInProjectView<cr>
+noremap <C-/> :action CommentByLineComment<cr>
+noremap cc :action CommentByLineComment<cr>
+
+noremap oi :action OptimizeImports<cr>
+noremap call :action CloseAllEditorsButActive<cr>
+
+" -- // keymap
+nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
+" cancellation
+noremap <C-j> <esc>
+noremap! <C-j> <esc>
+inoremap <C-j> <esc>
+"noremap! jj <esc>
+nnoremap <esc><esc> :nohlsearch<cr>
+nnoremap <silent><esc> :nohlsearch<cr>
+nnoremap <C-j> :nohlsearch<cr>
+"nnoremap jj :nohlsearch<cr>
+
+" tab control
+noremap <S-t> :<C-u>tabnew<cr>
+"noremap <C-t> :<C-u>tabnew<cr>:<C-u>cd<cr>:<C-u>FZF<cr>
+"noremap <C-t> :<C-u>tabnew<cr>:<C-u>Denite -resume -immediately <cr>
+"noremap <C-t> :<C-u>Denite buffer -immediately -default-action=tabopen <cr>
+noremap <A-tab> gt
+noremap! <A-tab> gt
+noremap <S-tab> gT
+noremap! <S-tab> gT
+
