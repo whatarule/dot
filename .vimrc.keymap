@@ -1,0 +1,127 @@
+
+" -- // vimrc
+noremap <C-d>e :<C-u>edit $MYVIMRC<cr>
+noremap se :<C-u>edit $MYVIMRC<cr>
+noremap <C-d>s :<C-u>write<cr>:<C-u>source $MYVIMRC<cr>
+noremap sr :<C-u>write<cr>:<C-u>source $MYVIMRC<cr>
+
+" -- // keymap
+" for us keyboard
+nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
+" cancellation
+noremap <C-j> <esc>
+noremap! <C-j> <esc>
+"noremap! jj <esc>
+nnoremap <silent><esc> :nohlsearch<cr>
+nnoremap <C-j> :nohlsearch<cr>
+"nnoremap jj :nohlsearch<cr>
+
+" cursor move
+noremap j gj
+noremap k gk
+noremap <S-h> ^
+noremap <S-l> $
+noremap <S-j> }
+noremap <S-k> {
+noremap <C-a> <home>
+noremap! <C-a> <home>
+noremap <C-e> <end>
+noremap! <C-e> <end>
+
+" edit utility
+"nnoremap <cr> o<esc>
+"inoremap [ []<left>
+"inoremap ( ()<left>
+"inoremap { {}<left>
+"yankround
+nmap <silent>p <Plug>(yankround-p)
+nmap <silent>P <Plug>(yankround-P)
+nmap gp <Plug>(yankround-gp)
+nmap gP <Plug>(yankround-gP)
+nmap <C-p> <Plug>(yankround-prev)
+nmap <C-n> <Plug>(yankround-next)
+
+" neosnippet
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
+"inoremap <expr><tab> pumvisible() ? "\<C-n>" :
+"  \ neosnippet#expandable_or_jumpable() ?
+"  \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
+snoremap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" window control
+set splitright
+set splitbelow
+noremap <C-s> :<C-u>vsplit<cr>
+noremap! <C-s> <esc> :<C-u>vsplit<cr>
+noremap <C-l> <C-w>l
+noremap <C-j><C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-h> <C-w>h
+"noremap! <C-l> <C-w>l
+"noremap! <A-j> <C-w>j
+"noremap! <A-k> <C-w>k
+"noremap! <C-h> <C-w>h
+"noremap <C-\> <C-w>|
+"noremap <C-^> <C-w>=
+
+" tab control
+noremap <S-t> :<C-u>tabnew<cr>
+"noremap <C-t> :<C-u>tabnew<cr>:<C-u>cd<cr>:<C-u>FZF<cr>
+"noremap <C-t> :<C-u>tabnew<cr>:<C-u>Denite -resume -immediately <cr>
+"noremap <C-t> :<C-u>Denite buffer -immediately -default-action=tabopen <cr>
+noremap <A-tab> gt
+noremap! <A-tab> gt
+noremap <S-tab> gT
+noremap! <S-tab> gT
+
+" terminal mode for neovim
+if has('nvim')
+noremap <space><space> :<C-u>terminal<cr><C-u>fish<cr>
+"noremap <space><space> :<C-u>terminal<cr><C-u>fish<cr><C-u>ls -la<cr>
+"noremap <space><space> :<C-u>vsplit<cr>:<C-u>terminal<cr>fish<cr>ls -la<cr>
+"tnoremap <silent> <esc> <C-\><C-n>
+tnoremap jj <C-\><C-n>
+tnoremap <silent><esc> <C-\><C-n>
+tnoremap <C-j> <C-\><C-n>
+tnoremap <C-t> <up>
+tnoremap <C-g> <down>
+tnoremap <C-s> :<C-u>vsplit<cr>
+tnoremap <A-l> <C-w>l
+tnoremap <A-j> <C-w>j
+tnoremap <A-k> <C-w>k
+tnoremap <A-h> <C-w>h
+tnoremap <C-t> <C-\><C-n>:<C-u>tabnew<cr>
+tnoremap <A-tab> <C-\><C-n>gt
+tnoremap <S-tab> <C-\><C-n>gT
+tnoremap ZZ <C-\><C-n>:q<cr>
+endif
+
+" command support
+" fzf
+noremap <C-f>d :<C-u>FZF<cr>
+noremap <C-f>a :<C-u>cd<cr>:<C-u>FZF<cr>
+" denite
+if has('nvim')
+nnoremap <C-d>b :<C-u>Denite buffer <cr>
+nnoremap db :<C-u>Denite buffer <cr>
+nnoremap <C-d>r :<C-u>Denite file_rec <cr>
+nnoremap <C-d>f :<C-u>Denite file_old <cr>
+nnoremap <C-d>m :<C-u>Denite file_mru <cr>
+nnoremap <C-d>y :<C-u>Denite neoyank <cr>
+nnoremap <C-d>l :<C-u>Denite line <cr>
+nnoremap <C-d>g :<C-u>Denite grep <cr>
+nnoremap <C-d>h :<C-u>Denite help <cr>
+" unite
+elseif !has('nvim')
+nnoremap <C-d>f :<C-u>Unite file_rec <cr>
+endif
+" cancellation
+"noremap <C-:> q:
+"noremap! <C-:> q:
+
