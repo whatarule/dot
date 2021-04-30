@@ -29,6 +29,10 @@
         {"before":["<Esc>"], "after":[], "commands": [ {"command": ":nohl"} ] },
         {"before":["<C-n>"], "after":[], "commands": [ {"command": ":nohl"} ] },
     ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {"before": [";"], "after": [":"]},
+        {"before": [":"], "after": [";"]},
+    ],
     "vim.insertModeKeyBindings": [
         {"before": ["j", "j"], "after": ["<Esc>"]},
         {"before": ["<C-j>"], "after": ["<Esc>"]}
@@ -58,4 +62,5 @@
     "terminal.integrated.automationShell.osx": "/usr/local/bin/fish",
     "editor.formatOnSave": true,
     "json.format.enable": false,
+    "vim.camelCaseMotion.enable": true,
 }

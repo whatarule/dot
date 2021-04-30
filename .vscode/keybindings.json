@@ -14,6 +14,16 @@
     "command": "extension.vim_escape",
     "when": "vim.active && !(vim.mode == Normal)" 
   },
+  {
+    "key": "gd",
+    "command": "editor.action.revealDefinition",
+    "when": "vim.active && !(vim.mode == Normal)" 
+  },
+  {
+    "key": "gd",
+    "command": "-editor.action.revealDefinition",
+    "when": "vim.active && !(vim.mode == Normal)" 
+  },
 
   {
     "key": "ctrl+enter",
@@ -56,5 +66,5 @@
   {
     "key": "ctrl+shift+u",
     "command": "-workbench.action.output.toggleOutput"
-  }
+  },
 ]
