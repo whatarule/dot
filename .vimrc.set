@@ -49,6 +49,9 @@ set tabstop=2
 set nf=hex
 set mouse=a
 
+set backspace=indent,eol,start
+set background=dark
+set wildmenu
 
 set cmdheight=2
 set laststatus=2
