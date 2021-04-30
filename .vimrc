@@ -29,28 +29,6 @@ tnoremap <S-tab> <C-\><C-n>gT
 tnoremap ZZ <C-\><C-n>:q<cr>
 endif
 
-" command support
-" fzf
-noremap <C-f>d :<C-u>FZF<cr>
-noremap <C-f>a :<C-u>cd<cr>:<C-u>FZF<cr>
-" denite
-if has('nvim')
-nnoremap <C-d>b :<C-u>Denite buffer <cr>
-nnoremap <C-d>r :<C-u>Denite file_rec <cr>
-nnoremap <C-d>f :<C-u>Denite file_old <cr>
-nnoremap <C-d>m :<C-u>Denite file_mru <cr>
-nnoremap <C-d>y :<C-u>Denite neoyank <cr>
-nnoremap <C-d>l :<C-u>Denite line <cr>
-nnoremap <C-d>g :<C-u>Denite grep <cr>
-nnoremap <C-d>h :<C-u>Denite help <cr>
-" unite
-elseif !has('nvim')
-nnoremap <C-d>f :<C-u>Unite file_rec <cr>
-endif
-" cancellation
-"noremap <C-:> q:
-"noremap! <C-:> q:
-
 " python
 augroup Python
 autocmd!
