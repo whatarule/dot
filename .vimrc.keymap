@@ -2,6 +2,10 @@
 " -- // vimrc
 noremap <C-d>e :<C-u>edit $MYVIMRC<cr>
 noremap se :<C-u>edit $MYVIMRC<cr>
+noremap sk :<C-u>edit ~/wk/dot/.vimrc.keymap<cr>
+noremap sp :<C-u>edit ~/wk/dot/.vimrc.plug<cr>
+noremap ss :<C-u>edit ~/wk/dot/.vimrc.set<cr>
+
 noremap <C-d>s :<C-u>write<cr>:<C-u>source $MYVIMRC<cr>
 noremap sr :<C-u>write<cr>:<C-u>source $MYVIMRC<cr>
 
