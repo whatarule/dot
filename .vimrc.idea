@@ -1,6 +1,7 @@
 
 " -- // keymap
-source .vimrc.keymap
+source ~/wk/dot/.vimrc.set
+source ~/wk/dot/.vimrc.keymap
 
 noremap de :<C-u>edit ~/.ideavimrc<cr>
 noremap sr :<C-u>source ~/.ideavimrc<cr>
@@ -8,11 +9,13 @@ noremap sr :<C-u>source ~/.ideavimrc<cr>
 nnoremap gd :action GotoDeclaration<cr>
 nnoremap gi :action GotoImplementation<cr>
 nnoremap fu :action FindUsages<cr>
-nnoremap <C-f> :action FindInPath<cr>
+nnoremap <C-f> :action SearchEverywhere<cr>
+nnoremap <S-C-f> :action FindInPath<cr>
 nnoremap ff :action SelectInProjectView<cr>
 noremap <C-/> :action CommentByLineComment<cr>
 noremap cc :action CommentByLineComment<cr>
 
+noremap <C-i> :action Scala.ExpandImplicits
 noremap oi :action OptimizeImports<cr>
 noremap call :action CloseAllEditorsButActive<cr>
 

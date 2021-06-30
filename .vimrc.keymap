@@ -26,7 +26,7 @@ vnoremap : ;
 noremap <C-j> <esc>
 "noremap! <C-j> <esc>
 inoremap <C-j> <esc>
-cnoremap <C-j> <esc>
+"cnoremap <C-j> <esc>
 "noremap! jj <esc>
 nnoremap <silent><esc> :nohlsearch<cr>
 nnoremap <esc><esc> :nohlsearch<cr>

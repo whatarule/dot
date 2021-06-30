@@ -3,9 +3,10 @@
 "set all&
 autocmd!
 
-source .vimrc.plug
-source .vimrc.set
-source .vimrc.keymap
+filetype plugin on
+source ~/wk/dot/.vimrc.plug
+source ~/wk/dot/.vimrc.set
+source ~/wk/dot/.vimrc.keymap
 
 " terminal mode for neovim
 if has('nvim')

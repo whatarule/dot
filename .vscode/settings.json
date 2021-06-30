@@ -1,5 +1,5 @@
 {
-    "editor.tabSize": 2,
+    "editor.tabSize": 8,
     "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "workbench.startupEditor": "newUntitledFile",
@@ -63,4 +63,9 @@
     "editor.formatOnSave": true,
     "json.format.enable": false,
     "vim.camelCaseMotion.enable": true,
+    "editor.cursorStyle": "line",
+    "editor.insertSpaces": false,
+    "editor.lineNumbers": "on",
+    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+    "editor.wordWrap": "off",
 }
