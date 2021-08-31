@@ -1,71 +1,102 @@
 {
-    "editor.tabSize": 8,
-    "editor.suggestSelection": "first",
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "workbench.startupEditor": "newUntitledFile",
-    "workbench.editor.restoreViewState": false,
-    "files.associations": {
-        "Jenkinsfile": "groovy"
-    },
-    //"jenkins-jack.jenkins.connections": [
-    //    {
-    //        "name": "localhost",
-    //        "uri": "http://localhost:8080/jenkins/",
-    //        "username": "komagata",
-    //        "password": "11bddf98ea6c04d1693435109a93286d9a",
-    //        "active": false
-    //    },
-    //],
-    "FSharp.useSdkScripts": true,
-    "vim.easymotion": true,
-    "vim.incsearch": true,
-    "vim.useSystemClipboard": true,
-    "vim.useCtrlKeys": true,
-    "vim.hlsearch": true, 
-    "vim.leader": "<space>",
-    "vim.normalModeKeyBindingsNonRecursive": [
-        {"before": [";"], "after": [":"]},
-        {"before": [":"], "after": [";"]},
-        {"before":["<Esc>"], "after":[], "commands": [ {"command": ":nohl"} ] },
-        {"before":["<C-n>"], "after":[], "commands": [ {"command": ":nohl"} ] },
-    ],
-    "vim.visualModeKeyBindingsNonRecursive": [
-        {"before": [";"], "after": [":"]},
-        {"before": [":"], "after": [";"]},
-    ],
-    "vim.insertModeKeyBindings": [
-        {"before": ["j", "j"], "after": ["<Esc>"]},
-        {"before": ["<C-j>"], "after": ["<Esc>"]}
-    ],
-    "breadcrumbs.showKeys": false,
-    "jenkins-jack.jenkins.connections": [
-        {
-            "name": "aaa",
-            "uri": "http://127.0.0.1:8080/jenkins",
-            "username": "komagata",
-            "password": "11bddf98ea6c04d1693435109a93286d9a",
-            "active": true
-        }
-    ],
-    "files.watcherExclude": {
-        "**/.bloop": true,
-        "**/.metals": true,
-        "**/.ammonite": true,
-        "**/target": true
-    },
-    "sqltools.results": {
-        "location": "current"
-    },
-    "window.zoomLevel": 2,
-    "git.suggestSmartCommit": false,
-    "terminal.integrated.shell.osx": "/usr/local/bin/fish",
-    "terminal.integrated.automationShell.osx": "/usr/local/bin/fish",
-    "editor.formatOnSave": true,
-    "json.format.enable": false,
-    "vim.camelCaseMotion.enable": true,
-    "editor.cursorStyle": "line",
-    "editor.insertSpaces": false,
-    "editor.lineNumbers": "on",
-    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
-    "editor.wordWrap": "off",
+  "search.followSymlinks": false,
+  "editor.tabSize": 8,
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.editor.restoreViewState": false,
+  "files.associations": {
+    "Jenkinsfile": "groovy"
+  },
+  //"jenkins-jack.jenkins.connections": [
+  //    {
+  //        "name": "localhost",
+  //        "uri": "http://localhost:8080/jenkins/",
+  //        "username": "komagata",
+  //        "password": "11bddf98ea6c04d1693435109a93286d9a",
+  //        "active": false
+  //    },
+  //],
+  "FSharp.useSdkScripts": true,
+  "vim.easymotion": true,
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  "vim.leader": "<space>",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    { "before": [";"], "after": [":"] },
+    { "before": [":"], "after": [";"] },
+    { "before": ["<Esc>"], "after": [], "commands": [{ "command": ":nohl" }] },
+    { "before": ["<C-n>"], "after": [], "commands": [{ "command": ":nohl" }] }
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    { "before": [";"], "after": [":"] },
+    { "before": [":"], "after": [";"] }
+  ],
+  "vim.insertModeKeyBindings": [
+    { "before": ["j", "j"], "after": ["<Esc>"] },
+    { "before": ["<C-j>"], "after": ["<Esc>"] }
+  ],
+  "breadcrumbs.showKeys": false,
+  "jenkins-jack.jenkins.connections": [
+    {
+      "name": "aaa",
+      "uri": "http://127.0.0.1:8080/jenkins",
+      "username": "komagata",
+      "password": "11bddf98ea6c04d1693435109a93286d9a",
+      "active": true
+    }
+  ],
+  "files.watcherExclude": {
+    "**/.bloop": true,
+    "**/.metals": true,
+    "**/.ammonite": true,
+    "**/target": true
+  },
+  "sqltools.results": {
+    "location": "current"
+  },
+  "window.zoomLevel": 2,
+  "git.suggestSmartCommit": false,
+  "terminal.integrated.automationShell.osx": "/usr/local/bin/fish",
+  "editor.formatOnSave": true,
+  "json.format.enable": false,
+  "vim.camelCaseMotion.enable": true,
+  "editor.cursorStyle": "line",
+  "editor.insertSpaces": false,
+  "editor.lineNumbers": "on",
+  "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+  "editor.wordWrap": "off",
+  "metals.javaHome": "/Users/wataru.komagata/.jabba/jdk/adopt@1.11.0-11/Contents/Home",
+
+  //ruby
+  "ruby.intellisense": "rubyLocate",
+  "ruby.useLanguageServer": true,
+  "solargraph.definitions": true,
+  "solargraph.diagnostics": true,
+  "ruby.lint": {
+    "standard": true
+  },
+  "[ruby]": {
+    "editor.useTabStops": false,
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true
+    //"editor.defaultFormatter": "mbessey.vscode-rufo"
+  },
+  "ruby.format": "rufo",
+  "rufo.exe": "/Users/wataru.komagata/.rbenv/shims/rufo", // can be an absolute path
+  "rufo.useBundler": false,
+  "saveAndRun": {
+    "commands": [
+      {
+        "match": "\\.rb$",
+        "cmd": "standardrb --fix"
+      },
+      {
+        "match": "\\.rb$",
+        "cmd": "rufo *"
+      }
+    ]
+  }
 }
