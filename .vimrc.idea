@@ -7,6 +7,7 @@ noremap de :<C-u>edit ~/.ideavimrc<cr>
 noremap sr :<C-u>source ~/.ideavimrc<cr>
 
 nnoremap gd :action GotoDeclaration<cr>
+nnoremap gs :action GotoSuperMethod<cr>
 nnoremap gi :action GotoImplementation<cr>
 nnoremap fu :action FindUsages<cr>
 nnoremap <C-f> :action SearchEverywhere<cr>
