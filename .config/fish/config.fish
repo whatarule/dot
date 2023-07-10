@@ -1,4 +1,13 @@
 
+# alilas
+alias v '/usr/bin/nvim'
+alias e '/usr/bin/emacs'
+
+alias p '/usr/bin/python3'
+
+alias gdrive gdrive-linux-x64
+
+
 # sdkman
 set -x PATH $HOME/.sdkman/candidates/kotlin/1.3.20/bin $PATH
 
@@ -17,14 +26,6 @@ set -x SBT_OPTS '-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:Max
 
 #set -x PKG_CONFIG_PATH /usr/lib/pkgconfig
 
-
-alias v '/usr/bin/nvim'
-alias e '/usr/bin/emacs'
-
-alias p '/usr/bin/python3'
-
-#alias rm 'trash'
-alias gdrive gdrive-linux-x64
 
 set -x FZF_DEFAULT_COMMAND 'find .'
 set -U FZF_LEGACY_KEYBINDINGS 0
