@@ -1,4 +1,6 @@
 
+ln -fns ~/wk/dot/.config/fish/config.fish ~/.config/fish/config.fish
+
 ln -fns ~/wk/dot/.vimrc ~/.config/nvim/init.vim
 ln -fns ~/wk/dot/.vimrc.idea ~/.ideavimrc
 ln -fns ~/wk/dot/.config/nvim/coc-settings.json ~/.config/nvim/coc-settings.json 
