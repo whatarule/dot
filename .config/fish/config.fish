@@ -3,10 +3,15 @@
 alias v '/usr/bin/nvim'
 alias e '/usr/bin/emacs'
 
+alias k '/usr/local/bin/kubectl'
+
 alias p '/usr/bin/python3'
 
 alias gdrive gdrive-linux-x64
 
+
+# sk
+bind \cf 'cd $(find . -name "*" -type d | sk)'
 
 # sdkman
 set -x PATH $HOME/.sdkman/candidates/kotlin/1.3.20/bin $PATH
