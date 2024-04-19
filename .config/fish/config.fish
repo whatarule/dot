@@ -35,10 +35,10 @@ set -x SBT_OPTS '-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:Max
 set -x FZF_DEFAULT_COMMAND 'find .'
 set -U FZF_LEGACY_KEYBINDINGS 0
 
-function cd
-  builtin cd $argv
-  ls
-end
+#function cd
+#  builtin cd $argv
+#  ls
+#end
 
 #function source
 #  source HOME/.config/fish/config.fish
