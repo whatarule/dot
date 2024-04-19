@@ -132,5 +132,6 @@
   "editor.inlineSuggest.enabled": true,
   "githubPullRequests.pullBranch": "never",
   "diffEditor.ignoreTrimWhitespace": false,
-  "window.zoomLevel": 1
+  "window.zoomLevel": 1,
+  "window.newWindowDimensions": "inherit"
 }
