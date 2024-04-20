@@ -2,3 +2,5 @@
 .history/
 *.log
 tags
+
+.DS_Store
