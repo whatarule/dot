@@ -114,7 +114,7 @@
     "editor.suggest.snippetsPreventQuickSuggestions": false,
     "editor.suggestSelection": "first",
     "editor.tabCompletion": "onlySnippets",
-    "editor.wordBasedSuggestions": false
+    "editor.wordBasedSuggestions": "off"
   },
   "workbench.colorTheme": "Nord",
   "[javascript]": {
@@ -133,5 +133,7 @@
   "githubPullRequests.pullBranch": "never",
   "diffEditor.ignoreTrimWhitespace": false,
   "window.zoomLevel": 1,
-  "window.newWindowDimensions": "inherit"
+  "window.newWindowDimensions": "inherit",
+  "editor.fontSize": 12.8,
+  "vsicons.dontShowNewVersionMessage": true,
 }
