@@ -24,7 +24,7 @@ set -x GOPATH $HOME/go
 set -x PATH $GOPATH/bin $PATH
 
 # sbt
-set -x SBT_OPTS '-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxMetaspaceSize=384M'
+set -x SBT_OPTS '-Xms512M -Xmx1536M -Xss1M -XX:MaxMetaspaceSize=384M'
 
 #set -x PKG_CONFIG_PATH /usr/lib/pkgconfig
 
