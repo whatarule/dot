@@ -134,6 +134,6 @@
   "diffEditor.ignoreTrimWhitespace": false,
   "window.zoomLevel": 1,
   "window.newWindowDimensions": "inherit",
-  "editor.fontSize": 12.8,
+  "editor.fontSize": 13.8,
   "vsicons.dontShowNewVersionMessage": true,
 }
