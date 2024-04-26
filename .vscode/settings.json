@@ -136,4 +136,8 @@
   "window.newWindowDimensions": "inherit",
   "editor.fontSize": 13.8,
   "vsicons.dontShowNewVersionMessage": true,
+  "Lua.diagnostics.globals": [
+    "vim",
+    "none"
+  ],
 }
