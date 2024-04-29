@@ -1,4 +1,5 @@
 
+ln -fns ~/wk/dot/.zshrc ~/.zshrc
 ln -fns ~/wk/dot/.config/fish/config.fish ~/.config/fish/config.fish
 
 ln -fns ~/wk/dot/.vimrc ~/.config/nvim/init.vim
